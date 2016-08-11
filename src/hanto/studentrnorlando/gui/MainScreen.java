@@ -144,7 +144,7 @@ public class MainScreen extends Screen {
 	 */
 	private void createUserInterface()
 	{
-		this.changeUserInterface(HomePane);        
+		this.changeUserInterface(GamePane);        
 	}
 	
 	/**
