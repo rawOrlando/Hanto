@@ -262,6 +262,14 @@ public class GameContentPane extends ViewContainer{
 			for(HantoCoordinate cor: list)
 			{
 				Component [] stuff = this.getComponents();
+				this.remove(stuff[stuff.length-1]);
+				this.remove(stuff[stuff.length-2]);
+				this.remove(stuff[stuff.length-3]);
+			}
+			/*
+			for(HantoCoordinate cor: list)
+			{
+				Component [] stuff = this.getComponents();
 				System.out.println("Tile " + cor.getX() + "," + cor.getY());
 				boolean delete = false;
 				// processor intenseive
@@ -285,6 +293,7 @@ public class GameContentPane extends ViewContainer{
 					}
 				}
 			}
+			*/
 			lastPieceClickedLocation = null;
 			pieceMove = null;
 			this.repaint();
