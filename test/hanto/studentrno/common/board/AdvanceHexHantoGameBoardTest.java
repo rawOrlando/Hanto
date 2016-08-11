@@ -106,15 +106,15 @@ public class AdvanceHexHantoGameBoardTest {
 	@Test //1
 	public void playButterFly()
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(advanceBoard.getPieceAt(new TestHantoCoordinate(0,0)) != null);
 	}
 	
 	@Test //2
 	public void playSecoundMove()
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(advanceBoard.getPieceAt(new TestHantoCoordinate(1,0)) != null);
 	}
 	
@@ -122,8 +122,8 @@ public class AdvanceHexHantoGameBoardTest {
 	public void playWhereThereIsAPiece()
 	{
 		//!!! what should hapen when you play ontop of a board
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(advanceBoard.getPieceAt(new TestHantoCoordinate(1,0)) == null);
 		assertTrue(advanceBoard.getPieceAt(new TestHantoCoordinate(0,0)) != null);
 		assertTrue(advanceBoard.getNieghbors(new TestHantoCoordinate(1,0)).size() == 1);
@@ -139,20 +139,20 @@ public class AdvanceHexHantoGameBoardTest {
 	@Test //5
 	public void checkValidPlayLocationWhenOnoPieceOnBoard() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(advanceBoard.checkValidPlayLocation(new TestHantoCoordinate(1,0)));
 	}
 	@Test (expected=HantoException.class) //6
 	public void checkValidPlayLocationPieceToFarAway() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		advanceBoard.checkValidPlayLocation(new TestHantoCoordinate(2,0));
 	}
 	
 	@Test (expected=HantoException.class) //7
 	public void checkValidPlayLocationPieceOnTopOfOtherPieces() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		advanceBoard.checkValidPlayLocation(new TestHantoCoordinate(0,0));
 	}
 	
@@ -160,114 +160,114 @@ public class AdvanceHexHantoGameBoardTest {
 	@Test //8
 	public void checkValidPlaceLocationWhenNoPieceOnBoard() throws HantoException
 	{
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(0,0), HantoPlayerColor.BLUE));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(0,0), HantoPlayerColor.BLACK));
 	}
 	
 	@Test //9
 	public void checkValidPlaceLocationWhenOnoPieceOnBoard() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.WHITE));
 	}
 	
 	@Test (expected=HantoException.class)//10
 	public void checkValidPlaceLocationWhenOnoPieceOnBoardOfSameColor() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.BLUE));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.BLACK));
 	}
 	
 	@Test (expected=HantoException.class) //11
 	public void checkValidPlaceLocationPieceToFarAway() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(2,0), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(2,0), HantoPlayerColor.WHITE));
 	}
 	
 	@Test (expected=HantoException.class) //12
 	public void checkValidPlaceLocationPieceOnTopOfOtherPieces() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(0,0), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(0,0), HantoPlayerColor.WHITE));
 	}
 	
 	@Test // 13 
 	public void checkValidPlaceLocationPieceBetweenTwoPieces() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(2,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(2,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.WHITE));
 	}
 	@Test // 14 
 	public void checkValidPlaceLocationPieceNextToTwoPieces() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,-1), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,-1), HantoPlayerColor.WHITE));
 	}
 	
 	@Test (expected=HantoException.class)// 15 
 	public void checkValidPlaceLocationPieceBetweenTwoPiecesWithInvalidColor() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(2,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.RED));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(2,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,0), HantoPlayerColor.WHITE));
 	}
 	@Test (expected=HantoException.class)// 16 
 	public void checkValidPlaceLocationPieceNextToTwoPiecesWithInvalidColor() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,-1), HantoPlayerColor.BLUE));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(1,-1), HantoPlayerColor.BLACK));
 	}
 	
 	@Test (expected=HantoException.class)// 17 
 	public void checkValidPlaceLocationPieceWithToTwoPiecesWithInvalidColor() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(-1,0), HantoPlayerColor.BLUE));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(-1,0), HantoPlayerColor.BLACK));
 	}
 	
 	@Test // 18
 	public void checkValidPlaceLocationPieceWithToTwoPieces() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(2,0), HantoPlayerColor.BLUE));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		assertTrue(advanceBoard.checkValidPlaceLocation(new TestHantoCoordinate(2,0), HantoPlayerColor.BLACK));
 	}
 	
 	//Test move Piece
 	@Test //19
 	public void moveAPieceOneSpace() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 	}
 	
 	@Test (expected=HantoException.class)//20
 	public void moveAPieceOneSpaceWrongPieceType() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW));
 	}
 	
 	@Test (expected=HantoException.class)//21
 	public void moveAPieceOneSpaceWrongColor() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		advanceBoard.movePiece(new TestHantoCoordinate(0,0), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
 	}
 	
 	@Test (expected=HantoException.class)//22
 	public void moveAPieceButNoPieceThrere() throws HantoException
 	{
-		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY));
-		advanceBoard.movePiece(new TestHantoCoordinate(0,-1), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		advanceBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		advanceBoard.movePiece(new TestHantoCoordinate(0,-1), new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 	}
 	
 	//Test isBoardOkWithMove

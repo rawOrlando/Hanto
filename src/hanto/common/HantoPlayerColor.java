@@ -17,7 +17,7 @@ package hanto.common;
  */
 public enum HantoPlayerColor
 {
-	BLUE, RED;
+	BLACK, WHITE;
 	
 	/**
 	 * gets the otherPlayers Color
@@ -26,10 +26,19 @@ public enum HantoPlayerColor
 	 */
 	public static HantoPlayerColor getOtherColor(HantoPlayerColor color)
 	{
-		if(color == HantoPlayerColor.RED)
+		if(color == HantoPlayerColor.WHITE)
 		{
-			return HantoPlayerColor.BLUE;
+			return HantoPlayerColor.BLACK;
 		}
-		return HantoPlayerColor.RED;
+		return HantoPlayerColor.WHITE;
+	}
+	
+	public static String getPrintableName(HantoPlayerColor color)
+	{
+		if(color == HantoPlayerColor.WHITE)
+		{
+			return "White";
+		}
+		return "Black";
 	}
 }

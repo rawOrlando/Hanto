@@ -109,17 +109,17 @@ public abstract class HantoBaseGame implements HantoGame{
 				done = true;
 				return MoveResult.DRAW;
 			}
-			if((currentWin && currentPlayer.getPlayerColor() == HantoPlayerColor.RED) ||
-					(nextWin && nextPlayer.getPlayerColor() == HantoPlayerColor.RED))
+			if((currentWin && currentPlayer.getPlayerColor() == HantoPlayerColor.WHITE) ||
+					(nextWin && nextPlayer.getPlayerColor() == HantoPlayerColor.WHITE))
 			{
 				done = true;
-				return MoveResult.BLUE_WINS;
+				return MoveResult.BLACK_WINS;
 			}
-			else if(currentWin || // verbose && currentPlayer.getPlayerColor() == HantoPlayerColor.BLUE) ||
-					nextWin) //&& nextPlayer.getPlayerColor() == HantoPlayerColor.BLUE))
+			else if(currentWin || // verbose && currentPlayer.getPlayerColor() == HantoPlayerColor.BLACK) ||
+					nextWin) //&& nextPlayer.getPlayerColor() == HantoPlayerColor.BLACK))
 			{
 				done = true;
-				return MoveResult.RED_WINS;
+				return MoveResult.WHITE_WINS;
 			}
 		}
 		if(turn >= MAXNUMBEROFTURNS)

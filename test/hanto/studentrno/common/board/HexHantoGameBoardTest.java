@@ -110,17 +110,17 @@ public class HexHantoGameBoardTest {
 	@Test // 2
 	public void getPieceAtOrgin() 
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(0,0)).getType(), HantoPieceType.BUTTERFLY);
-		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(0,0)).getColor(), HantoPlayerColor.BLUE);
+		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(0,0)).getColor(), HantoPlayerColor.BLACK);
 	}
 	
 	@Test //3
 	public void getPieceFromNonOrginSpot()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(3,6), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.CRAB));
+		hexBoard.playPiece(new TestHantoCoordinate(3,6), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.CRAB));
 		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(3,6)).getType(), HantoPieceType.CRAB);
-		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(3,6)).getColor(), HantoPlayerColor.BLUE);
+		assertEquals(hexBoard.getPieceAt(new TestHantoCoordinate(3,6)).getColor(), HantoPlayerColor.BLACK);
 	}
 	
 	// Test Next To
@@ -146,26 +146,26 @@ public class HexHantoGameBoardTest {
 	@Test //7
 	public void noOneNextToSpot()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(!hexBoard.isAdjacentToSomeOne((new TestHantoCoordinate(0,0))));
 	}
 	
 	@Test //8
 	public void someOneisNextToSpot()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.isAdjacentToSomeOne((new TestHantoCoordinate(1,0))));
 	}
 	
 	@Test //9
 	public void manynestTosomeOneisNextToSpot()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.isAdjacentToSomeOne((new TestHantoCoordinate(0,0))));
 	}
 	
@@ -174,41 +174,41 @@ public class HexHantoGameBoardTest {
 	@Test //10
 	public void isNotSurronded()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(!hexBoard.isSurronded((new TestHantoCoordinate(1,0))));
 	}
 	
 	@Test //11
 	public void isSurronded()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.isSurronded((new TestHantoCoordinate(0,0))));
 	}
 	
 	@Test //12
 	public void isSurrondedPartly()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(!hexBoard.isSurronded((new TestHantoCoordinate(0,0))));
 	}
 	
 	@Test //13
 	public void SomeOneElseisSurrondedButNotThisSpot()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(!hexBoard.isSurronded((new TestHantoCoordinate(1,0))));
 	}
 	
@@ -223,9 +223,9 @@ public class HexHantoGameBoardTest {
 	@Test //15
 	public void getTheSingleNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(1,0)).size() == 1);
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(1,0)).get(0).getX() == 0);
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(1,0)).get(0).getY() == 0);
@@ -234,51 +234,51 @@ public class HexHantoGameBoardTest {
 	@Test //16
 	public void getDoubleNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(0,0)).size() == 2);
 	}
 	
 	@Test //17
 	public void getTripleNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(0,0)).size() == 3);
 	}
 	
 	@Test //18
 	public void getQuadNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(0,0)).size() == 4);
 	}
 	
 	@Test //19
 	public void getPentaNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(0,0)).size() == 5);
 	}
 	
 	@Test //20
 	public void getHexaNieghbor()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghbors(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
@@ -309,60 +309,60 @@ public class HexHantoGameBoardTest {
 	@Test //22
 	public void getTheSingleNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(1,0)).size() == 6);
 	}
 	
 	@Test //23
 	public void getDoubleNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
 	@Test //24
 	public void getTripleNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
 	@Test //25
 	public void getQuadNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
 	@Test //26
 	public void getPentaNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
 	@Test //27
 	public void getHexaNieghborsSpots()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
-		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(-1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertTrue(hexBoard.getNieghboringSpots(new TestHantoCoordinate(0,0)).size() == 6);
 	}
 	
@@ -437,7 +437,7 @@ public class HexHantoGameBoardTest {
 	@Test //35
 	public void pirntBoardOfOne()
 	{
-		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY));
+		hexBoard.playPiece(new TestHantoCoordinate(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
 		assertEquals(hexBoard.getPrintableBoard(), "(0, 0) Butterfly");
 	}
 	

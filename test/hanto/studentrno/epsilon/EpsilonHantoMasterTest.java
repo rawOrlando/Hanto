@@ -72,7 +72,7 @@ public class EpsilonHantoMasterTest
 	{
 		// By default, blue moves first.
 		game = factory.makeHantoGame(HantoGameID.EPSILON_HANTO);
-		redGame = factory.makeHantoGame(HantoGameID.EPSILON_HANTO, RED);
+		redGame = factory.makeHantoGame(HantoGameID.EPSILON_HANTO, WHITE);
 	}
 	
 	//Borrowed tests from Beta ~
@@ -89,7 +89,7 @@ public class EpsilonHantoMasterTest
 		final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -99,7 +99,7 @@ public class EpsilonHantoMasterTest
 		final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 	}
 	
@@ -136,7 +136,7 @@ public class EpsilonHantoMasterTest
 		assertEquals(OK, mr);
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(BUTTERFLY, redp.getType());
 	}
 	
@@ -149,7 +149,7 @@ public class EpsilonHantoMasterTest
 		assertEquals(OK, mr);
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(SPARROW, redp.getType());
 	}
 	
@@ -168,11 +168,11 @@ public class EpsilonHantoMasterTest
 		
 		assertEquals(OK, mr);
 		final HantoPiece bluep = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, bluep.getColor());
+		assertEquals(BLACK, bluep.getColor());
 		assertEquals(BUTTERFLY, bluep.getType());
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(BUTTERFLY, redp.getType());
 	}
 	
@@ -192,15 +192,15 @@ public class EpsilonHantoMasterTest
 		
 		assertEquals(OK, mr);
 		HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 		
 		p = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(SPARROW, p.getType());
 		
 		p = game.getPieceAt(makeCoordinate(-1, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 	}
 	
@@ -320,7 +320,7 @@ public class EpsilonHantoMasterTest
 				case(6): mr = game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(0, 1)); break;
 			}
 		}
-		assertEquals(mr, MoveResult.RED_WINS);
+		assertEquals(mr, MoveResult.WHITE_WINS);
 	}
 	
 	@Test 		//19
@@ -336,7 +336,7 @@ public class EpsilonHantoMasterTest
 		game.makeMove(HORSE, null, makeCoordinate(2, 0));
 		final MoveResult mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
 		
-		assertEquals(mr, MoveResult.BLUE_WINS);
+		assertEquals(mr, MoveResult.BLACK_WINS);
 	}
 	
 	@Test	//20
@@ -419,7 +419,7 @@ public class EpsilonHantoMasterTest
 		final MoveResult mr = redGame.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = redGame.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -458,7 +458,7 @@ public class EpsilonHantoMasterTest
 				case(10): mr = game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(0, 1)); break;
 			}
 		}
-		assertEquals(MoveResult.RED_WINS, mr);
+		assertEquals(MoveResult.WHITE_WINS, mr);
 	}
 	
 	@Test //26
@@ -469,7 +469,7 @@ public class EpsilonHantoMasterTest
 		game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(1, -1));
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -916,7 +916,7 @@ public class EpsilonHantoMasterTest
 		final MoveResult mr = redGame.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = redGame.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -955,7 +955,7 @@ public class EpsilonHantoMasterTest
 		MoveResult mr = game.makeMove(null, null, null);
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		
-		assertEquals(mr, MoveResult.RED_WINS);
+		assertEquals(mr, MoveResult.WHITE_WINS);
 	}
 	
 	@Test (expected=HantoException.class) 	//62
@@ -1222,7 +1222,7 @@ public class EpsilonHantoMasterTest
 			}
 		}
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, 1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1247,7 +1247,7 @@ public class EpsilonHantoMasterTest
 		}
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, -1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1272,7 +1272,7 @@ public class EpsilonHantoMasterTest
 		}
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(-1, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1297,7 +1297,7 @@ public class EpsilonHantoMasterTest
 		}
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1322,7 +1322,7 @@ public class EpsilonHantoMasterTest
 		}
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1347,7 +1347,7 @@ public class EpsilonHantoMasterTest
 		}
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(-1, 1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 			
 	}
@@ -1363,7 +1363,7 @@ public class EpsilonHantoMasterTest
 		
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(-1, 1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(HORSE, p.getType());
 	}
 	
@@ -1390,7 +1390,7 @@ public class EpsilonHantoMasterTest
 		
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(CRAB, p.getType());
 	}
 	
@@ -1506,7 +1506,7 @@ public class EpsilonHantoMasterTest
 			}
 		}
 		
-		assertEquals(p, MoveResult.BLUE_WINS);
+		assertEquals(p, MoveResult.BLACK_WINS);
 		
 	}
 	

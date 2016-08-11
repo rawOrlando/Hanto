@@ -1,7 +1,7 @@
 /**
  * this is the content pane which will hold all GUi elemetns need for the settigns screen
  */
-package hanto.studentrnorlando.gui;
+package hanto.studentrnorlando.gui.contentpane;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 
 import hanto.common.HantoAILevel;
 import hanto.common.HantoGameID;
+import hanto.studentrnorlando.gui.Screen;
 
 /**
  * Is the View in MVC, for the Settings Screen 

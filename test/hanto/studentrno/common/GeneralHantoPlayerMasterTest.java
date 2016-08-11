@@ -73,8 +73,8 @@ public class GeneralHantoPlayerMasterTest {
 	public void setup()
 	{
 		// By default, blue moves first.
-		player = new BetaHantoPlayer(HantoPlayerColor.BLUE);
-		redPlayer = new BetaHantoPlayer(HantoPlayerColor.RED);
+		player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		redPlayer = new BetaHantoPlayer(HantoPlayerColor.WHITE);
 	}
 	
 	@Test // 1
@@ -88,13 +88,13 @@ public class GeneralHantoPlayerMasterTest {
 	@Test // 2
 	public void playerColorBlueWorks()
 	{
-		assertEquals(player.getPlayerColor(), HantoPlayerColor.BLUE);
+		assertEquals(player.getPlayerColor(), HantoPlayerColor.BLACK);
 	}
 	
 	@Test // 3
 	public void playerColorRedWorks()
 	{
-		assertEquals(redPlayer.getPlayerColor(), HantoPlayerColor.RED);
+		assertEquals(redPlayer.getPlayerColor(), HantoPlayerColor.WHITE);
 	}
 	
 	@Test(expected=HantoException.class) //4

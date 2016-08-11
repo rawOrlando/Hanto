@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import hanto.studentrnorlando.gui.HomeContentPane;
 import hanto.studentrnorlando.gui.MainScreen;
-import hanto.studentrnorlando.gui.SettingsContentPane;
+import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
+import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
 
 public class GUIMasterTest {
 

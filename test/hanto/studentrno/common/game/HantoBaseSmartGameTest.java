@@ -20,8 +20,8 @@ public class HantoBaseSmartGameTest {
 	{
 		//IHantoPlayer currentPlayer = 
 		IHantoGameBoard board = HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.BETA_HANTO);
-		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLUE);
-		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.RED);
+		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.WHITE);
 		HantoBaseGame game = new TestHantoBaseGame(board, currentPlayer, nextPlayer, 20);
 		assertEquals(board, game.getBoard());
 		assertNotNull(game);

@@ -26,8 +26,8 @@ public class AlphaHantoGame implements HantoGame
 {
 	private boolean firstMove = true;
 	private HantoCordinateImpl blueButterflyHex = null, redButterflyHex = null;
-	private final HantoPiece blueButterfly = new HantoPieceImpl(BLUE, BUTTERFLY);
-	private final HantoPiece redButterfly = new HantoPieceImpl(RED, BUTTERFLY);
+	private final HantoPiece blueButterfly = new HantoPieceImpl(BLACK, BUTTERFLY);
+	private final HantoPiece redButterfly = new HantoPieceImpl(WHITE, BUTTERFLY);
 	private boolean gameOver= false;
 	/*
 	 * @see hanto.common.HantoGame#makeMove(hanto.common.HantoPieceType, hanto.common.HantoCoordinate, hanto.common.HantoCoordinate)

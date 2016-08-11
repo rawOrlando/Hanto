@@ -76,8 +76,8 @@ public class HantoBaseGameTest
 	{
 		//IHantoPlayer currentPlayer = 
 		IHantoGameBoard board = HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.BETA_HANTO);
-		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLUE);
-		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.RED);
+		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.WHITE);
 		HantoBaseGame game = new TestHantoBaseGame(board, currentPlayer, nextPlayer, 20);
 		assertEquals(board, game.getBoard());
 		assertNotNull(game);
@@ -98,7 +98,7 @@ public class HantoBaseGameTest
 	@Test	//3
 	public void getgameStatusOnTie() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
@@ -116,7 +116,7 @@ public class HantoBaseGameTest
 	@Test	//4
 	public void getGameStatusPlayerMakeHimselfLose() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
@@ -125,13 +125,13 @@ public class HantoBaseGameTest
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
 		game.makeMove(SPARROW, null, makeCoordinate(0, 1));
-		assertEquals(game.gameStatus(), MoveResult.RED_WINS);
+		assertEquals(game.gameStatus(), MoveResult.WHITE_WINS);
 	}
 	
 	@Test	//5
 	public void getGameStatusPlayerMakeHimselfLosRed() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.RED);
+		HantoBaseGame game = makeGame(HantoPlayerColor.WHITE);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
@@ -140,13 +140,13 @@ public class HantoBaseGameTest
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
 		game.makeMove(SPARROW, null, makeCoordinate(0, 1));
-		assertEquals(game.gameStatus(), MoveResult.BLUE_WINS);
+		assertEquals(game.gameStatus(), MoveResult.BLACK_WINS);
 	}
 	
 	@Test	//6
 	public void getGameStatusBlueWins() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.RED);
+		HantoBaseGame game = makeGame(HantoPlayerColor.WHITE);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
@@ -156,13 +156,13 @@ public class HantoBaseGameTest
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
 		game.makeMove(SPARROW, null, makeCoordinate(0, 1));
-		assertEquals(game.gameStatus(), MoveResult.BLUE_WINS);
+		assertEquals(game.gameStatus(), MoveResult.BLACK_WINS);
 	}
 	
 	@Test	//7
 	public void getGameStatusRedWins() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
@@ -172,13 +172,13 @@ public class HantoBaseGameTest
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
 		game.makeMove(SPARROW, null, makeCoordinate(0, 1));
-		assertEquals(game.gameStatus(), MoveResult.RED_WINS);
+		assertEquals(game.gameStatus(), MoveResult.WHITE_WINS);
 	}
 	
 	@Test (expected=HantoException.class)	//8
 	public void DoesNotPlayButterFlyInThreTurns() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(SPARROW, null, makeCoordinate(0, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(1, 0));
@@ -192,7 +192,7 @@ public class HantoBaseGameTest
 	@Test (expected=HantoException.class)	//9
 	public void doesNotPlayeOnOrginOnFirstMove() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
 	}
@@ -200,7 +200,7 @@ public class HantoBaseGameTest
 	@Test (expected=HantoException.class)	//9.1
 	public void doesNotPlayeOnOrginXOnFirstMove() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 	}
@@ -208,7 +208,7 @@ public class HantoBaseGameTest
 	@Test (expected=HantoException.class)	//9.2
 	public void doesNotPlayeOnOrginYOnFirstMove() throws HantoException
 	{
-		HantoBaseGame game = makeGame(HantoPlayerColor.BLUE);
+		HantoBaseGame game = makeGame(HantoPlayerColor.BLACK);
 		
 		game.makeMove(SPARROW, null, makeCoordinate(0, 1));
 	}
@@ -217,8 +217,8 @@ public class HantoBaseGameTest
 	public void runsOutOfMovesAndContinuesToPlay() throws HantoException
 	{
 		IHantoGameBoard board = HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.BETA_HANTO);
-		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLUE);
-		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.RED);
+		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.WHITE);
 		HantoBaseGame game = new TestHantoBaseGame(board, currentPlayer, nextPlayer, 4);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -236,8 +236,8 @@ public class HantoBaseGameTest
 	public void drawWhenNoMoreMoves() throws HantoException
 	{
 		IHantoGameBoard board = HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.BETA_HANTO);
-		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLUE);
-		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.RED);
+		IHantoPlayer currentPlayer = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		IHantoPlayer nextPlayer = new BetaHantoPlayer(HantoPlayerColor.WHITE);
 		HantoBaseGame game = new TestHantoBaseGame(board, currentPlayer, nextPlayer, 4);
 		
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));

@@ -130,13 +130,13 @@ private boolean resigned;
 			{
 				throw new HantoPrematureResignationException();
 			}
-			if(currentPlayer.getPlayerColor() == HantoPlayerColor.BLUE)
+			if(currentPlayer.getPlayerColor() == HantoPlayerColor.BLACK)
 			{
-				return MoveResult.RED_WINS;
+				return MoveResult.WHITE_WINS;
 			}
-			else if(currentPlayer.getPlayerColor() == HantoPlayerColor.RED)
+			else if(currentPlayer.getPlayerColor() == HantoPlayerColor.WHITE)
 			{
-				return MoveResult.BLUE_WINS;
+				return MoveResult.BLACK_WINS;
 			}
 		}
 		return super.gameStatus();

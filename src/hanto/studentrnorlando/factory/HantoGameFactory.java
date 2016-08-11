@@ -53,7 +53,7 @@ public class HantoGameFactory
 	 */
 	public HantoGame makeHantoGame(HantoGameID gameId)
 	{
-		return makeHantoGame(gameId, HantoPlayerColor.BLUE);
+		return makeHantoGame(gameId, HantoPlayerColor.BLACK);
 	}
 	
 	/**

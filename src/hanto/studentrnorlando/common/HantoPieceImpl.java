@@ -69,4 +69,29 @@ public class HantoPieceImpl implements HantoPiece
 	{
 		return cordinate;
 	}
+	
+	/*
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof HantoPiece)) {
+			return false;
+		}
+		final HantoPiece other = (HantoPiece) obj;
+		if (!color.equals(other.getColor())) {
+			return false;
+		}
+		if (!type.equals(other.getType())) {
+			return false;
+		}
+		return true;
+	}
 }

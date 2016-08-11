@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import hanto.common.HantoGameID;
-import hanto.studentrnorlando.gui.GameContentPane;
-import hanto.studentrnorlando.gui.HomeContentPane;
 import hanto.studentrnorlando.gui.MainScreen;
-import hanto.studentrnorlando.gui.SettingsContentPane;
+import hanto.studentrnorlando.gui.contentpane.GameContentPane;
+import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
+import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
 
 public class GUIIntialazationTest {
 

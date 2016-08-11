@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import hanto.common.HantoAILevel;
 import hanto.common.HantoGameID;
 import hanto.studentrnorlando.Driver;
+import hanto.studentrnorlando.gui.contentpane.GameContentPane;
+import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
+import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
+import hanto.studentrnorlando.gui.contentpane.ViewContainer;
 
 /**
  * this is the main screen the will be a single window for the game
@@ -22,6 +26,7 @@ public class MainScreen extends Screen {
 	
 	private HomeContentPane HomePane;
 	private SettingsContentPane SettingPane;
+	private GameContentPane GamePane;
 	private Driver model;
 	private HantoAILevel AILevel;
 	private HantoGameID gameType;
@@ -34,6 +39,7 @@ public class MainScreen extends Screen {
 	{
 		HomePane = new HomeContentPane(this);
 		SettingPane = new SettingsContentPane(this);
+		GamePane = new GameContentPane(this, HantoGameID.ALPHA_HANTO);
 		this.createUserInterface();
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		numberOfPlayers = 2;

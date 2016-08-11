@@ -372,12 +372,12 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 
 	@Override
 	public boolean checkValidPlayLocationForPiece(HantoCoordinate where, HantoPiece piece) throws HantoException {
-		HantoPlayerColor otherPlayerColor = HantoPlayerColor.BLUE;
+		HantoPlayerColor otherPlayerColor = HantoPlayerColor.BLACK;
 		switch(piece.getColor())
 		{
-			case RED : otherPlayerColor = HantoPlayerColor.BLUE; 
+			case WHITE : otherPlayerColor = HantoPlayerColor.BLACK; 
 						break;
-			case BLUE : otherPlayerColor = HantoPlayerColor.RED; 
+			case BLACK : otherPlayerColor = HantoPlayerColor.WHITE; 
 						break;
 				
 		}

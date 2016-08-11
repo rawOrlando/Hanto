@@ -38,43 +38,43 @@ public class HantoTournamentMasterTest {
 	@Test // 2
 	public void startsBetaGame()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, true);
 	}
 	
 	@Test // 3
 	public void startsGammaGame()
 	{
-		player.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK, true);
 	}
 	
 	@Test // 4
 	public void startsDeltaGame()
 	{
-		player.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLACK, true);
 	}
 	
 	@Test // 5
 	public void startsEpsilonGame()
 	{
-		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLACK, true);
 	}
 	
 	@Test // 6
 	public void startsRedGame()
 	{
-		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.RED, true);
+		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.WHITE, true);
 	}
 	
 	@Test // 7
 	public void startsMovesSecoundGame()
 	{
-		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.RED, false);
+		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.WHITE, false);
 	}
 	
 	@Test // 6
 	public void firstMoveAtOrigin()
 	{
-		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLACK, true);
 		HantoMoveRecord rec = player.makeMove(null);
 		assertTrue(rec.getTo().getY() == 0 && rec.getTo().getX() == 0);
 		
@@ -83,7 +83,7 @@ public class HantoTournamentMasterTest {
 	@Test // 6
 	public void secoundPlaceNextOrigin()
 	{
-		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, false);
+		player.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLACK, false);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0)));
 		assertTrue(rec.getTo().getY() < 2 && rec.getTo().getX() < 2 &&
 				rec.getTo().getY() > -2 && rec.getTo().getX() > -2
@@ -94,7 +94,7 @@ public class HantoTournamentMasterTest {
 	@Test // 6.1
 	public void secoundPlaceNextOriginBeta()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, false);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, false);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0)));
 		assertTrue(rec.getTo().getY() < 2 && rec.getTo().getX() < 2 &&
 				rec.getTo().getY() > -2 && rec.getTo().getX() > -2
@@ -105,7 +105,7 @@ public class HantoTournamentMasterTest {
 	@Test // 6.2
 	public void secoundPlaceAfterAMissPlay()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, false);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, false);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(3,-43)));
 		assertTrue(rec == null);
 		
@@ -114,7 +114,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7
 	public void thirdMoveExists()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, true);
 		player.makeMove(null);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
 		assertTrue(rec != null);
@@ -124,7 +124,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7.1
 	public void thirdMoveIsToSomePlace()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, true);
 		player.makeMove(null);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
 		assertTrue(rec.getTo() != null);
@@ -134,7 +134,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7.2
 	public void thirdMovehasAPiece()
 	{
-		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, true);
+		player.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, true);
 		player.makeMove(null);
 		HantoMoveRecord rec = player.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
 		System.out.println("BETA:" +rec.getPiece() + rec.getTo().getX() +rec.getTo().getY());
@@ -145,7 +145,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7.2
 	public void thirdMoveEpslion()
 	{
-		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLACK, true);
 		testPlayer.makeMove(null);
 		System.out.println(testPlayer.printBoard());
 		HantoMoveRecord rec = testPlayer.makeMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
@@ -162,7 +162,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7.3
 	public void thirdWithNoButterFlies()
 	{
-		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(1,0))));
 		HantoMoveRecord rec = testPlayer.makeMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(-1,0)));
@@ -175,7 +175,7 @@ public class HantoTournamentMasterTest {
 	@Test // 7.3
 	public void thirdMoveInvalid()
 	{
-		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(1,0))));
 		HantoMoveRecord rec = testPlayer.makeMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, null));
@@ -186,7 +186,7 @@ public class HantoTournamentMasterTest {
 	@Test // 8
 	public void BetaResignsWhenOutOfPieces()
 	{
-		testPlayer.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(-1,0))));
@@ -210,7 +210,7 @@ public class HantoTournamentMasterTest {
 	@Test // 9
 	public void willMakeAMoveWhenNoPieceLeftGAMMA()
 	{
-		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(-1,0))));
@@ -239,7 +239,7 @@ public class HantoTournamentMasterTest {
 	@Test // 9.2
 	public void willMakeAMoveWhenNoPieceLeftDELTA()
 	{
-		testPlayer.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(-1,0))));
@@ -275,7 +275,7 @@ public class HantoTournamentMasterTest {
 	@Test
 	public void getInvlaidMoveandGivesUp()
 	{
-		testPlayer.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLACK, true);
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0))));
 		assertTrue(testPlayer.playMove(new HantoMoveRecord(HantoPieceType.SPARROW, null, new HantoCordinateImpl(-1,0))));
@@ -288,7 +288,7 @@ public class HantoTournamentMasterTest {
 	public void resignsOutofmovesandPlacement()
 	{
 		HantoMoveRecord rec = null;
-		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLUE, true);
+		testPlayer.startGame(HantoGameID.EPSILON_HANTO, HantoPlayerColor.BLACK, true);
 		for(int turns = 1; turns <= 15; turns++)
 		{
 			switch(turns)

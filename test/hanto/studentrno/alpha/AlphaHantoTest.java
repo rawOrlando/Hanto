@@ -126,7 +126,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(0, 0));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(BLUE, butterfly.getColor());
+		assertEquals(BLACK, butterfly.getColor());
 	}
 	
 	@Test	// 9
@@ -136,7 +136,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(1, -1));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(1, -1));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test	// 9.1
@@ -146,7 +146,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(1, 0));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(1, 0));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test	// 9.2
@@ -156,7 +156,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(-1, 0));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(-1, 0));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test	// 9.3
@@ -166,7 +166,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 1));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(0, 1));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test	// 9.4
@@ -176,7 +176,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, -1));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(0, -1));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test	// 9.5
@@ -186,7 +186,7 @@ public class AlphaHantoTest
 		game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(-1, 1));
 		final HantoPiece butterfly = game.getPieceAt(new TestHantoCoordinate(-1, 1));
 		assertEquals(BUTTERFLY, butterfly.getType());
-		assertEquals(RED, butterfly.getColor());
+		assertEquals(WHITE, butterfly.getColor());
 	}
 	
 	@Test(expected = HantoException.class)	// 10

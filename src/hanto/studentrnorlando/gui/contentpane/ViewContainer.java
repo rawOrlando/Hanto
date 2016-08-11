@@ -2,9 +2,11 @@
  * This file is a class designed to alow MVC to work in JSwing.
  * This will play the part as the view.
  */
-package hanto.studentrnorlando.gui;
+package hanto.studentrnorlando.gui.contentpane;
 
 import java.awt.Container;
+
+import hanto.studentrnorlando.gui.Screen;
 
 /**
  * Is the View in the MVC model working with JSwing

@@ -2,13 +2,15 @@
  * This container will act like an View in the MVC model
  * This is responsible for the view on the home screen
  */
-package hanto.studentrnorlando.gui;
+package hanto.studentrnorlando.gui.contentpane;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+
+import hanto.studentrnorlando.gui.Screen;
 
 /**
  * this is the content pane which will hold all GUi elemetns need for the home screen

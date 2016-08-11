@@ -74,7 +74,7 @@ public class DeltaHantoMasterTest
 	{
 		// By default, blue moves first.
 		game = factory.makeHantoGame(HantoGameID.DELTA_HANTO);
-		redGame = factory.makeHantoGame(HantoGameID.DELTA_HANTO, RED);
+		redGame = factory.makeHantoGame(HantoGameID.DELTA_HANTO, WHITE);
 	}
 	
 	//Borrowed tests from Beta ~
@@ -91,7 +91,7 @@ public class DeltaHantoMasterTest
 		final MoveResult mr = game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -101,7 +101,7 @@ public class DeltaHantoMasterTest
 		final MoveResult mr = game.makeMove(SPARROW, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 	}
 	
@@ -132,7 +132,7 @@ public class DeltaHantoMasterTest
 		assertEquals(OK, mr);
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(BUTTERFLY, redp.getType());
 	}
 	
@@ -145,7 +145,7 @@ public class DeltaHantoMasterTest
 		assertEquals(OK, mr);
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(SPARROW, redp.getType());
 	}
 	
@@ -164,11 +164,11 @@ public class DeltaHantoMasterTest
 		
 		assertEquals(OK, mr);
 		final HantoPiece bluep = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, bluep.getColor());
+		assertEquals(BLACK, bluep.getColor());
 		assertEquals(BUTTERFLY, bluep.getType());
 		
 		final HantoPiece redp = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, redp.getColor());
+		assertEquals(WHITE, redp.getColor());
 		assertEquals(BUTTERFLY, redp.getType());
 	}
 	
@@ -188,15 +188,15 @@ public class DeltaHantoMasterTest
 		
 		assertEquals(OK, mr);
 		HantoPiece p = game.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 		
 		p = game.getPieceAt(makeCoordinate(1, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(SPARROW, p.getType());
 		
 		p = game.getPieceAt(makeCoordinate(-1, 0));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(SPARROW, p.getType());
 	}
 	
@@ -316,7 +316,7 @@ public class DeltaHantoMasterTest
 				case(6): mr = game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(0, 1)); break;
 			}
 		}
-		assertEquals(mr, MoveResult.RED_WINS);
+		assertEquals(mr, MoveResult.WHITE_WINS);
 	}
 	
 	@Test 		//19
@@ -332,7 +332,7 @@ public class DeltaHantoMasterTest
 		game.makeMove(SPARROW, null, makeCoordinate(2, 0));
 		final MoveResult mr = game.makeMove(SPARROW, makeCoordinate(0, -1), makeCoordinate(1, -1));
 		
-		assertEquals(mr, MoveResult.BLUE_WINS);
+		assertEquals(mr, MoveResult.BLACK_WINS);
 	}
 	
 	@Test	//20
@@ -415,7 +415,7 @@ public class DeltaHantoMasterTest
 		final MoveResult mr = redGame.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = redGame.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -454,7 +454,7 @@ public class DeltaHantoMasterTest
 				case(10): mr = game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(0, 1)); break;
 			}
 		}
-		assertEquals(MoveResult.RED_WINS, mr);
+		assertEquals(MoveResult.WHITE_WINS, mr);
 	}
 	
 	@Test //26
@@ -465,7 +465,7 @@ public class DeltaHantoMasterTest
 		game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(1, -1));
 		
 		final HantoPiece p = game.getPieceAt(makeCoordinate(1, -1));
-		assertEquals(BLUE, p.getColor());
+		assertEquals(BLACK, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -981,11 +981,11 @@ public class DeltaHantoMasterTest
 	@Test 							 //57
 	public void redPlaysFirstPeice() throws HantoException
 	{
-		HantoBaseGame game1 = new DeltaHantoGame(HantoPlayerColor.RED);
+		HantoBaseGame game1 = new DeltaHantoGame(HantoPlayerColor.WHITE);
 		final MoveResult mr = game1.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		assertEquals(OK, mr);
 		final HantoPiece p = game1.getPieceAt(makeCoordinate(0, 0));
-		assertEquals(RED, p.getColor());
+		assertEquals(WHITE, p.getColor());
 		assertEquals(BUTTERFLY, p.getType());
 	}
 	
@@ -1033,7 +1033,7 @@ public class DeltaHantoMasterTest
 				case(1): mr = game.makeMove(null, null, null); break;
 			}
 		}
-		assertEquals(mr, MoveResult.BLUE_WINS);
+		assertEquals(mr, MoveResult.BLACK_WINS);
 	}
 	
 	@Test 					 	//60
@@ -1041,7 +1041,7 @@ public class DeltaHantoMasterTest
 	{
 		MoveResult mr = game.makeMove(null, null, null);;
 		
-		assertEquals(mr, MoveResult.RED_WINS);
+		assertEquals(mr, MoveResult.WHITE_WINS);
 	}
 	
 	@Test (expected=HantoException.class)				 	//61
@@ -1050,7 +1050,7 @@ public class DeltaHantoMasterTest
 		MoveResult mr = game.makeMove(null, null, null);
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		
-		assertEquals(mr, MoveResult.RED_WINS);
+		assertEquals(mr, MoveResult.WHITE_WINS);
 	}
 	
 	@Test (expected=HantoException.class) 	//62

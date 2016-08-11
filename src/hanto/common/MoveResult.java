@@ -18,7 +18,7 @@ package hanto.common;
 public enum MoveResult
 {
 	OK,
-	BLUE_WINS,
-	RED_WINS,
+	BLACK_WINS,
+	WHITE_WINS,
 	DRAW;
 }

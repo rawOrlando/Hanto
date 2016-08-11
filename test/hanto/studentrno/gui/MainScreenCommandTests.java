@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import hanto.studentrnorlando.gui.HomeContentPane;
 import hanto.studentrnorlando.gui.MainScreen;
-import hanto.studentrnorlando.gui.SettingsContentPane;
+import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
+import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
 import hanto.common.HantoAILevel;
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
