@@ -42,6 +42,8 @@ public class GameContentPane extends ViewContainer{
 	HantoCoordinate lastPieceClickedLocation = null;
 	HantoPiece pieceMove;
 	
+	List<JGameTile> currentOptionsTiles =  new ArrayList<JGameTile>();
+	
 	//!!! test delete later
 	JButton button;
 	
@@ -49,10 +51,6 @@ public class GameContentPane extends ViewContainer{
 		//!!! figure out title
 		
 		super(screen, gameID.toString() + " Game");
-		
-		button = new JButton("Hi");
-		button.setBounds(100,100,100,100);
-		this.add(button);
 		
 		//!!! temp for testing
 		options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();
@@ -157,17 +155,19 @@ public class GameContentPane extends ViewContainer{
 	
 	public void drawOptions(List<HantoCoordinate> options)
 	{
+		currentOptionsTiles.clear();
 		for(HantoCoordinate coordinate: options)
 		{
-			drawTile(null, coordinate);
+			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
 	}
 	
-	public void drawTile(HantoPiece piece, HantoCoordinate coordinate)
+	public JGameTile drawTile(HantoPiece piece, HantoCoordinate coordinate)
 	{
 		JGameTile tile = new JGameTile(piece, coordinate);
 		tile.setBounds(initXOffset, initYOffset, tileSize, tileSize);
 		this.add(tile);
+		return tile;
 	}
 	
 	@Override
@@ -241,12 +241,18 @@ public class GameContentPane extends ViewContainer{
 	
 	private void clearOptions(HantoCoordinate cordinate)
 	{
-		button = new JButton("Hi");
-		button.setBounds(100,100,100,100);
-		this.remove(button);
 		List<HantoCoordinate> list = options.get(cordinate);
 		if(cordinate != null && list != null)
 		{
+			for(JGameTile tile: currentOptionsTiles)
+			{
+				for(JButton button: tile.getButtons())
+				{
+					remove(button);
+				}
+				remove(tile);
+				
+			}
 			/*
 			 *Should work but it does not, the meory might be different or somethign
 			for(HantoCoordinate cor: list)
@@ -259,6 +265,8 @@ public class GameContentPane extends ViewContainer{
 			pieceMove = null;
 			this.repaint();
 			*/
+			//Magic number bandaid
+			/*
 			for(HantoCoordinate cor: list)
 			{
 				Component [] stuff = this.getComponents();
@@ -266,6 +274,7 @@ public class GameContentPane extends ViewContainer{
 				this.remove(stuff[stuff.length-2]);
 				this.remove(stuff[stuff.length-3]);
 			}
+			*/
 			/*
 			for(HantoCoordinate cor: list)
 			{
