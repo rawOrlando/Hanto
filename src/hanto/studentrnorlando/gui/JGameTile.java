@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentrnorlando.common.HantoPieceImpl;
 
 public class JGameTile extends JLabel {
 
@@ -44,6 +46,18 @@ public class JGameTile extends JLabel {
 	{
 		this.coordinate = coordinate;
 		this.piece = piece;
+		setImage();
+	}
+	
+	public JGameTile(HantoPieceType pieceType, HantoPlayerColor color)
+	{
+		if(color == null)
+		{
+			//set as DefaultColor
+			color = HantoPlayerColor.BLACK;
+		}
+		piece = new HantoPieceImpl(color, pieceType);
+		coordinate = null;
 		setImage();
 	}
 	
@@ -162,11 +176,15 @@ public class JGameTile extends JLabel {
 	
 	public int getXPoint()
 	{
+		if(coordinate == null)
+			return 0;
 		return coordinate.getX() *getXOffSet() + coordinate.getY() * getXYOffSet();
 	}
 	
 	public int getYPoint()
 	{
+		if(coordinate == null)
+			return 0;
 		return (- coordinate.getY() *getYOffSet());
 	}
 	
@@ -185,7 +203,11 @@ public class JGameTile extends JLabel {
 		{
 			return false;
 		}
-		if(!((JGameTile)other).getCordinate().equals(getCordinate()))
+		if((((JGameTile)other).getCordinate() == null ^ getCordinate() == null))
+		{
+			return false;
+		}
+		if(getCordinate() != null && !((JGameTile)other).getCordinate().equals(getCordinate()))
 		{
 			return false;
 		}

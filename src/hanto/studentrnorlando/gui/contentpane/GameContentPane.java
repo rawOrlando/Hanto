@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -16,6 +18,8 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentrnorlando.beta.BetaHantoPlayer;
+import hanto.studentrnorlando.common.GeneralHantoPlayer;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
 import hanto.studentrnorlando.common.HantoPieceImpl;
 import hanto.studentrnorlando.gui.GUIHantoGameBoard;
@@ -31,18 +35,23 @@ public class GameContentPane extends ViewContainer{
 	
 	private int tileSize = 140;
 	
-	
+	//!!! som stuff is hard code coem back and fix
+	// lets get it to show first
 	private static final long serialVersionUID = 1L;
 	HantoGameID gameID;
 	ImageIcon img;
 	JPanel paintPanel, textPanel;
 	GUIHantoGameBoard board;
 	List<HantoCoordinate> optionsTemp = new ArrayList<HantoCoordinate>();
-	Map<HantoCoordinate, List<HantoCoordinate>> options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();;
+	Map<HantoCoordinate, List<HantoCoordinate>> options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();
+	Map<HantoPieceImpl, List<HantoCoordinate>> placementOptions = new HashMap<HantoPieceImpl, List<HantoCoordinate>>();;
 	HantoCoordinate lastPieceClickedLocation = null;
 	HantoPiece pieceMove;
 	
 	List<JGameTile> currentOptionsTiles =  new ArrayList<JGameTile>();
+	
+	GeneralHantoPlayer player;
+	int numberOfPieces = 0;
 	
 	//!!! test delete later
 	JButton button;
@@ -51,6 +60,14 @@ public class GameContentPane extends ViewContainer{
 		//!!! figure out title
 		
 		super(screen, gameID.toString() + " Game");
+		
+		BetaHantoPlayer player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
+		PlayerPieceContentPane playerPane = new PlayerPieceContentPane(player);
+		playerPane.setBounds(0, 0, 500, 500);
+		playerPane.setVisible(true);
+		this.add(new PlayerPieceContentPane(player));
+		
+		this.player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
 		
 		//!!! temp for testing
 		options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();
@@ -63,6 +80,11 @@ public class GameContentPane extends ViewContainer{
 		//tempList.add(new HantoCordinateImpl(-3,0));
 		options.put(new HantoCordinateImpl(-1,0), tempList);
 		//reSizeTiles();
+		
+		tempList = new ArrayList<HantoCoordinate>();
+		tempList.add(new HantoCordinateImpl(3,0));
+		placementOptions.put(new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY), tempList);
+		placementOptions.put(new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW), tempList);
 		/*
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -112,6 +134,8 @@ public class GameContentPane extends ViewContainer{
 		*/
 		
 		// TODO Auto-generated constructor stub !!!
+		 
+		drawPlayerUnPlayedPieces();
 	}
 	
 	public void reSizeTiles()
@@ -158,6 +182,7 @@ public class GameContentPane extends ViewContainer{
 		currentOptionsTiles.clear();
 		for(HantoCoordinate coordinate: options)
 		{
+			System.out.println("adding options");
 			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
 	}
@@ -169,6 +194,38 @@ public class GameContentPane extends ViewContainer{
 		this.add(tile);
 		return tile;
 	}
+	
+	//
+	//draw Bag
+	//
+	private void drawPlayerUnPlayedPieces()
+	{
+		drawLine();
+		if(player != null )
+		{
+			for(HantoPieceType type: player.getPieceOptions())
+			{
+				drawPlayerUnPlayedPiece(type);
+				numberOfPieces++;
+			}
+		}
+	}
+	
+	private void drawPlayerUnPlayedPiece(HantoPieceType type)
+	{
+		JGameTile tile = new JGameTile(type, player.getPlayerColor());
+		tile.setBounds(30 + 100 * numberOfPieces, 500, 100, 100);
+		this.add(tile);
+	}
+	
+	private void drawLine()
+	{
+		// !!! to do
+	}
+	
+	//
+	//Done with Bag
+	//
 	
 	@Override
 	public Component add(Component comp)
@@ -215,7 +272,8 @@ public class GameContentPane extends ViewContainer{
 		clearOptions();
 		lastPieceClickedLocation = cordinate;
 		pieceMove = piece;
-		showOptions(lastPieceClickedLocation);
+		showOptions(lastPieceClickedLocation, pieceMove);
+			
 	}
 	
 	private void finishMove(HantoCoordinate cordiante)
@@ -224,14 +282,48 @@ public class GameContentPane extends ViewContainer{
 		clearOptions();
 	}
 	
-	public void showOptions(HantoCoordinate corrdiantes)
+	public void showOptions(HantoCoordinate cordinate, HantoPiece piece)
 	{
-		if(options.get(corrdiantes) != null)
+		if(cordinate != null)
 		{
-			drawOptions(options.get(corrdiantes));
+			showMoveOptions(cordinate);
+		}
+		else
+		{
+			showPlaceOptions(piece);
+		}
+	}
+	
+	public void showPlaceOptions(HantoPiece piece)
+	{
+		System.out.println(piece.getType().getPrintableName() + " " + piece.getColor().getPrintableName(piece.getColor()));
+		System.out.println(placementOptions.size());
+		if(placementOptions.get(piece) != null)
+		{
+			System.out.println("HI");
+			drawOptions(placementOptions.get(piece));
 			this.repaint();
 		}
-		//!!!
+		for(HantoPieceImpl piece1: placementOptions.keySet())
+		{
+			// this should not be this bad...
+			if(piece1.equals(piece))
+			{
+				drawOptions(placementOptions.get(piece1));
+				this.repaint();
+				return;
+			}
+		}
+	}
+	
+	public void showMoveOptions(HantoCoordinate cordinate)
+	{
+		
+		if(options.get(cordinate) != null)
+		{
+			drawOptions(options.get(cordinate));
+			this.repaint();
+		}
 	}
 	
 	private void clearOptions()
@@ -241,78 +333,25 @@ public class GameContentPane extends ViewContainer{
 	
 	private void clearOptions(HantoCoordinate cordinate)
 	{
-		List<HantoCoordinate> list = options.get(cordinate);
-		if(cordinate != null && list != null)
+		for(JGameTile tile: currentOptionsTiles)
 		{
-			for(JGameTile tile: currentOptionsTiles)
+			remove(tile);
+			tile.setVisible(false);
+			for(JButton button: tile.getButtons())
 			{
-				for(JButton button: tile.getButtons())
-				{
-					remove(button);
-				}
-				remove(tile);
-				
+				remove(button);
 			}
-			/*
-			 *Should work but it does not, the meory might be different or somethign
-			for(HantoCoordinate cor: list)
-			{
-				JGameTile tile = new JGameTile(null, cor);
-				tile.setBounds(initXOffset, initYOffset, tileSize, tileSize);
-				this.remove(tile);
-			}
-			lastPieceClickedLocation = null;
-			pieceMove = null;
-			this.repaint();
-			*/
-			//Magic number bandaid
-			/*
-			for(HantoCoordinate cor: list)
-			{
-				Component [] stuff = this.getComponents();
-				this.remove(stuff[stuff.length-1]);
-				this.remove(stuff[stuff.length-2]);
-				this.remove(stuff[stuff.length-3]);
-			}
-			*/
-			/*
-			for(HantoCoordinate cor: list)
-			{
-				Component [] stuff = this.getComponents();
-				System.out.println("Tile " + cor.getX() + "," + cor.getY());
-				boolean delete = false;
-				// processor intenseive
-				// !!! should I just hold all the Tile in an aditional place, for a less process intensive method
-				// this medtod will be called alot would like a better way to do it
-				for(Component com : stuff)
-				{
-					if(com.getClass().equals(JGameTile.class))
-					{
-						HantoCoordinate componentsCordinate = ((JGameTile)com).getCordinate();
-						
-						if(componentsCordinate.getX() == cor.getX() && componentsCordinate.getY() ==cor.getY())
-						{
-							System.out.println("Removed Somthing");
-							this.remove(com);
-							for(JButton button: ((JGameTile)com).getButtons())
-							{
-								this.remove(button);
-							}
-						}
-					}
-				}
-			}
-			*/
-			lastPieceClickedLocation = null;
-			pieceMove = null;
-			this.repaint();
-
-			this.revalidate();
-			//BandAid to processor intensive...
-			/*this.removeAll();
-			draw();
-			this.repaint();*/
+			
 		}
+		
+		
+		
+		lastPieceClickedLocation = null;
+		pieceMove = null;
+		this.repaint();
+
+		this.revalidate();
+		
 	}
 	
 	

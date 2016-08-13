@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import org.junit.Test;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
@@ -21,7 +22,8 @@ public class JGameTileTest
 	@Test	//1
 	public void intializeEmpty()
 	{
-		new JGameTile(null, null);
+		HantoCoordinate cor = null;
+		new JGameTile(null, cor);
 	}
 	
 	@Test	//2
