@@ -6,9 +6,11 @@ package hanto.studentrnorlando.common.board;
 
 
 import java.util.List;
+import java.util.Map;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.studentrnorlando.common.HantoPieceImpl;
 
@@ -104,4 +106,7 @@ public interface IHantoGameBoard
 	 */
 	int distanceBetween(HantoCoordinate src, HantoCoordinate dest); // Delete and move to some where else !!!
 
+	HantoGameID getGameID();
+	
+	Map<HantoCoordinate, HantoPiece> getPieces();
 }

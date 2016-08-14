@@ -235,5 +235,15 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 		}
 		return s;
 	}
+	
+	public HantoGameID getGameID()
+	{
+		return this.gameId;
+	}
+	
+	public Map<HantoCoordinate, HantoPiece> getPieces()
+	{
+		return this.pieces;
+	}
 
 }

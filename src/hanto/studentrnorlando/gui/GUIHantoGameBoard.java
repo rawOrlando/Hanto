@@ -8,6 +8,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.studentrnorlando.common.HantoPieceImpl;
 import hanto.studentrnorlando.common.board.HexHantoGameBoard;
+import hanto.studentrnorlando.common.board.IHantoGameBoard;
 
 public class GUIHantoGameBoard extends HexHantoGameBoard{
 
@@ -16,6 +17,11 @@ public class GUIHantoGameBoard extends HexHantoGameBoard{
 		// TODO Auto-generated constructor stub
 	}
 
+	public GUIHantoGameBoard(IHantoGameBoard board)
+	{
+		super(board.getPieces(), board.getGameID());
+		
+	}
 	//Does not make moves on this board !!!
 	@Override
 	public boolean checkValidPlayLocation(HantoCoordinate where) throws HantoException {

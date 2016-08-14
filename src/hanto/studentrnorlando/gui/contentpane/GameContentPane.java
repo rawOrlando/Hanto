@@ -21,7 +21,9 @@ import hanto.common.HantoPlayerColor;
 import hanto.studentrnorlando.beta.BetaHantoPlayer;
 import hanto.studentrnorlando.common.GeneralHantoPlayer;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
+import hanto.studentrnorlando.common.HantoMove;
 import hanto.studentrnorlando.common.HantoPieceImpl;
+import hanto.studentrnorlando.common.board.IHantoGameBoard;
 import hanto.studentrnorlando.gui.GUIHantoGameBoard;
 import hanto.studentrnorlando.gui.JGameTile;
 import hanto.studentrnorlando.gui.Screen;
@@ -44,7 +46,7 @@ public class GameContentPane extends ViewContainer{
 	GUIHantoGameBoard board;
 	List<HantoCoordinate> optionsTemp = new ArrayList<HantoCoordinate>();
 	Map<HantoCoordinate, List<HantoCoordinate>> options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();
-	Map<HantoPieceImpl, List<HantoCoordinate>> placementOptions = new HashMap<HantoPieceImpl, List<HantoCoordinate>>();;
+	Map<HantoPiece, List<HantoCoordinate>> placementOptions = new HashMap<HantoPiece, List<HantoCoordinate>>();;
 	HantoCoordinate lastPieceClickedLocation = null;
 	HantoPiece pieceMove;
 	
@@ -61,81 +63,45 @@ public class GameContentPane extends ViewContainer{
 		
 		super(screen, gameID.toString() + " Game");
 		
-		BetaHantoPlayer player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
-		PlayerPieceContentPane playerPane = new PlayerPieceContentPane(player);
-		playerPane.setBounds(0, 0, 500, 500);
-		playerPane.setVisible(true);
-		this.add(new PlayerPieceContentPane(player));
-		
-		this.player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
-		
-		//!!! temp for testing
-		options = new HashMap<HantoCoordinate, List<HantoCoordinate>>();
-		List<HantoCoordinate> tempList = new ArrayList<HantoCoordinate>();
-		tempList.add(new HantoCordinateImpl(2,0));
-		options.put(new HantoCordinateImpl(0,0), tempList);
-		tempList = new ArrayList<HantoCoordinate>();
-		
-		tempList.add(new HantoCordinateImpl(-2,0));
-		//tempList.add(new HantoCordinateImpl(-3,0));
-		options.put(new HantoCordinateImpl(-1,0), tempList);
-		//reSizeTiles();
-		
-		tempList = new ArrayList<HantoCoordinate>();
-		tempList.add(new HantoCordinateImpl(3,0));
-		placementOptions.put(new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY), tempList);
-		placementOptions.put(new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW), tempList);
-		/*
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-		paintPanel = new JPanel();
-		textPanel = new JPanel();
-
-		this.add(paintPanel);
-		this.add(textPanel);
-		*/
-		Map<HantoCoordinate, HantoPiece> pieces = new HashMap<HantoCoordinate, HantoPiece>();
-		pieces.put(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
-		
-		
-		pieces.put(new HantoCordinateImpl(1,1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
-		pieces.put(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
-		pieces.put(new HantoCordinateImpl(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
-		//pieces.put(new HantoCordinateImpl(0,-1), null);
-		
-		//pieces.put(new HantoCordinateImpl(7,-4), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
-		
-		//drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(5,0));
-		//drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(6,0));
-		//drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(7,0));
-		//drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(8,0));
-		//drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(9,0));
-		 board = new GUIHantoGameBoard(pieces, HantoGameID.BETA_HANTO);
-		 reSizeTiles();
-		 draw();
-		/*
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.CRAB), new HantoCordinateImpl(1,1));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW), new HantoCordinateImpl(2,1));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW), new HantoCordinateImpl(2,2));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.CRAB), new HantoCordinateImpl(3,-2));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.BUTTERFLY), new HantoCordinateImpl(2,-2));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.HORSE), new HantoCordinateImpl(2,-1));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.HORSE), new HantoCordinateImpl(4,-2));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.BLUE, HantoPieceType.SPARROW), new HantoCordinateImpl(5,-3));
-		
-		drawTitle(new HantoPieceImpl(HantoPlayerColor.RED, HantoPieceType.SPARROW), new HantoCordinateImpl(6,-3));
-		*/
-		
-		// TODO Auto-generated constructor stub !!!
-		 
-		drawPlayerUnPlayedPieces();
+		reSizeTiles();
+		draw();
+	}
+	
+	// make lazy way nt furture
+	public void updateGame(IHantoGameBoard board, List<HantoMove> moves)
+	{
+		board = new GUIHantoGameBoard(board);
+		convertMoves(moves);
+	}
+	
+	public void convertMoves(List<HantoMove> moves)
+	{
+		// !!! make movre effecent use a real sort algorithm
+		while(0 == moves.size())
+		{
+			HantoMove move = moves.get(0);
+			List<HantoCoordinate> tempList = new ArrayList<HantoCoordinate>();
+			for(HantoMove otherMove: moves)
+			{
+				if(move.getPiece() != null && move.getPiece().equals(otherMove.getPiece()) &&
+						(move.getFrom() == null && otherMove.getFrom() == null)
+						|| move.getFrom().equals(otherMove.getFrom()))
+				{
+					tempList.add(otherMove.getTo());
+					moves.remove(otherMove);
+				}
+			}
+			//tempList.add(move.getTo());
+			if(move.getFrom() == null)
+			{
+				placementOptions.put(move.getPiece(), tempList);
+			}
+			else
+			{
+				options.put(move.getFrom(), tempList);
+			}
+			moves.remove(move);
+		}
 	}
 	
 	public void reSizeTiles()
@@ -165,6 +131,7 @@ public class GameContentPane extends ViewContainer{
 	public void draw()
 	{
 		drawTiles();
+		drawPlayerUnPlayedPieces();
 		//drawOptions();
 	}
 	
@@ -304,7 +271,7 @@ public class GameContentPane extends ViewContainer{
 			drawOptions(placementOptions.get(piece));
 			this.repaint();
 		}
-		for(HantoPieceImpl piece1: placementOptions.keySet())
+		for(HantoPiece piece1: placementOptions.keySet())
 		{
 			// this should not be this bad...
 			if(piece1.equals(piece))
