@@ -23,10 +23,12 @@ import hanto.studentrnorlando.common.GeneralHantoPlayer;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
 import hanto.studentrnorlando.common.HantoMove;
 import hanto.studentrnorlando.common.HantoPieceImpl;
+import hanto.studentrnorlando.common.IHantoPlayer;
 import hanto.studentrnorlando.common.board.IHantoGameBoard;
 import hanto.studentrnorlando.gui.GUIHantoGameBoard;
 import hanto.studentrnorlando.gui.JGameTile;
 import hanto.studentrnorlando.gui.Screen;
+import hanto.tournament.HantoMoveRecord;
 
 
 
@@ -52,7 +54,7 @@ public class GameContentPane extends ViewContainer{
 	
 	List<JGameTile> currentOptionsTiles =  new ArrayList<JGameTile>();
 	
-	GeneralHantoPlayer player;
+	IHantoPlayer player;
 	int numberOfPieces = 0;
 	
 	//!!! test delete later
@@ -62,39 +64,49 @@ public class GameContentPane extends ViewContainer{
 		//!!! figure out title
 		
 		super(screen, gameID.toString() + " Game");
+		//!!! fix later genreate of somethign else
+		player = new BetaHantoPlayer(HantoPlayerColor.BLACK);
 		
-		reSizeTiles();
-		draw();
 	}
 	
 	// make lazy way nt furture
-	public void updateGame(IHantoGameBoard board, List<HantoMove> moves)
+	public void updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player)
 	{
-		board = new GUIHantoGameBoard(board);
+		this.board = new GUIHantoGameBoard(board);
 		convertMoves(moves);
+		this.player = player;
+		this.removeAll();
+		
+		reSizeTiles();
+		draw();
+		this.repaint();
+		this.revalidate();
 	}
 	
-	public void convertMoves(List<HantoMove> moves)
+	public void convertMoves(List<HantoMoveRecord> moves)
 	{
 		// !!! make movre effecent use a real sort algorithm
-		while(0 == moves.size())
+		while(0 != moves.size())
 		{
-			HantoMove move = moves.get(0);
+			HantoMoveRecord move = moves.get(0);
 			List<HantoCoordinate> tempList = new ArrayList<HantoCoordinate>();
-			for(HantoMove otherMove: moves)
+			
+			for(int index = 1; index < moves.size(); index++)
 			{
+				HantoMoveRecord otherMove = moves.get(index);
 				if(move.getPiece() != null && move.getPiece().equals(otherMove.getPiece()) &&
 						(move.getFrom() == null && otherMove.getFrom() == null)
 						|| move.getFrom().equals(otherMove.getFrom()))
 				{
 					tempList.add(otherMove.getTo());
 					moves.remove(otherMove);
+					index--;
 				}
 			}
-			//tempList.add(move.getTo());
+			tempList.add(move.getTo());
 			if(move.getFrom() == null)
 			{
-				placementOptions.put(move.getPiece(), tempList);
+				placementOptions.put(new HantoPieceImpl(player.getPlayerColor(), move.getPiece()), tempList);
 			}
 			else
 			{
@@ -108,7 +120,6 @@ public class GameContentPane extends ViewContainer{
 	{
 		//figure out X
 		int boardLength = board.getXBoardLength();
-		System.out.println(this.getWidth());
 		// if any piece is 
 		int xTileSize = 450/(boardLength + 2) ;
 		
@@ -149,7 +160,6 @@ public class GameContentPane extends ViewContainer{
 		currentOptionsTiles.clear();
 		for(HantoCoordinate coordinate: options)
 		{
-			System.out.println("adding options");
 			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
 	}
@@ -176,6 +186,7 @@ public class GameContentPane extends ViewContainer{
 				numberOfPieces++;
 			}
 		}
+		numberOfPieces = 0;
 	}
 	
 	private void drawPlayerUnPlayedPiece(HantoPieceType type)
@@ -243,10 +254,26 @@ public class GameContentPane extends ViewContainer{
 			
 	}
 	
-	private void finishMove(HantoCoordinate cordiante)
+	private void finishMove(HantoCoordinate cordinate)
 	{
-		System.out.println("Finshed");
+		handler.doAction(generateMovementCommand(cordinate));
 		clearOptions();
+	}
+	
+	private String generateMovementCommand(HantoCoordinate cordinate)
+	{
+		String reValue = "Move ";
+		reValue = reValue + this.pieceMove.getType().name() + " ";
+		if(lastPieceClickedLocation == null)
+		{
+			reValue = reValue + "null ";
+		}
+		else
+		{
+			reValue = reValue + lastPieceClickedLocation.toString() + " ";
+		}
+		reValue = reValue + cordinate.toString();
+		return reValue;
 	}
 	
 	public void showOptions(HantoCoordinate cordinate, HantoPiece piece)
@@ -263,11 +290,8 @@ public class GameContentPane extends ViewContainer{
 	
 	public void showPlaceOptions(HantoPiece piece)
 	{
-		System.out.println(piece.getType().getPrintableName() + " " + piece.getColor().getPrintableName(piece.getColor()));
-		System.out.println(placementOptions.size());
 		if(placementOptions.get(piece) != null)
 		{
-			System.out.println("HI");
 			drawOptions(placementOptions.get(piece));
 			this.repaint();
 		}

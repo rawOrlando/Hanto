@@ -7,12 +7,19 @@ package hanto.studentrnorlando.gui;
 import javax.swing.JFrame;
 
 import hanto.common.HantoAILevel;
+import hanto.common.HantoException;
 import hanto.common.HantoGameID;
+import hanto.common.HantoPlayerColor;
 import hanto.studentrnorlando.Driver;
+import hanto.studentrnorlando.common.game.HantoBaseSmartGame;
+import hanto.studentrnorlando.common.game.HantoModelGame;
+import hanto.studentrnorlando.common.game.HantoSmartGame;
+import hanto.studentrnorlando.factory.HantoGameFactory;
 import hanto.studentrnorlando.gui.contentpane.GameContentPane;
 import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
 import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
 import hanto.studentrnorlando.gui.contentpane.ViewContainer;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * this is the main screen the will be a single window for the game
@@ -32,6 +39,8 @@ public class MainScreen extends Screen {
 	private HantoGameID gameType;
 	private int numberOfPlayers;
 	
+	private HantoModelGame game;
+	
 	/**
 	 * Contructor, if you don't want to play the game
 	 */
@@ -44,6 +53,9 @@ public class MainScreen extends Screen {
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		numberOfPlayers = 2;
 		gameType = HantoGameID.ALPHA_HANTO;
+		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK);
+		//Move this !!!
+		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer());
 	}
 	
 	public MainScreen(Driver model)
@@ -121,6 +133,29 @@ public class MainScreen extends Screen {
 					e.printStackTrace();
 				}
 				return true;
+			}
+		}
+		if(splited[0].equals("Move"))
+		{
+			if(splited.length >= 4)
+			{
+				HantoMoveRecord move = HantoMoveRecord.convertFromString(splited[1] + " " + splited[2] + " " + splited[3] + " ");
+				if(move != null)
+				{
+
+					try {
+						game.makeMove(move);
+						this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer());
+					} catch (HantoException e) {
+						System.out.println("Game Broke");
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					System.out.println("Message was messaesed up");
+					//We messed up else where
+				}
 			}
 		}
 		return super.doAction(actionLine);

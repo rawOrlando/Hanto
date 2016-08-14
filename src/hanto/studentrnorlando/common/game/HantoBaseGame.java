@@ -4,6 +4,8 @@
  */
 package hanto.studentrnorlando.common.game;
 
+import java.util.List;
+
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPiece;
@@ -12,9 +14,11 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.HantoPrematureResignationException;
 import hanto.common.HantoGame;
 import hanto.common.MoveResult;
+import hanto.studentrnorlando.common.GeneralHantoPlayer;
 import hanto.studentrnorlando.common.HantoPieceImpl;
 import hanto.studentrnorlando.common.IHantoPlayer;
 import hanto.studentrnorlando.common.board.IHantoGameBoard;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * reresents a Hanto Game
@@ -22,7 +26,7 @@ import hanto.studentrnorlando.common.board.IHantoGameBoard;
  * @author Orlando
  *
  */
-public abstract class HantoBaseGame implements HantoGame{
+public abstract class HantoBaseGame implements HantoModelGame{
 
 	public static final int TURNSTILLBUTTERFLY = 4;
 	public static int NUMBEROFPLAYERS = 2;
@@ -51,7 +55,22 @@ public abstract class HantoBaseGame implements HantoGame{
 		MAXNUMBEROFTURNS = maxNumberofTurns;
 		
 	}
+	
+	@Override
+	public List<HantoMoveRecord> getAllPlayersOptions() {
+		return getAllPlayersOptions(currentPlayer.getPlayerColor());
+	}
 
+	public IHantoPlayer  getPlayer()
+	{
+		return currentPlayer;
+	}
+	
+	public MoveResult makeMove(HantoMoveRecord record) throws HantoException
+	{
+		return makeMove(record.getPiece(), record.getFrom(), record.getTo());
+	}
+	
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException

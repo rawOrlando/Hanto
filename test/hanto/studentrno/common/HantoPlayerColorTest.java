@@ -19,7 +19,7 @@ public class HantoPlayerColorTest {
 	@Test // 2
 	public void StringToWHITE()
 	{
-		assertEquals(HantoPlayerColor.valueOf("WHITE"), HantoPlayerColor.WHITE);
+		assertEquals(HantoPlayerColor.valueOf(HantoPlayerColor.WHITE.name()), HantoPlayerColor.WHITE);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)	 // 3

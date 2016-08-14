@@ -91,6 +91,37 @@ public class HantoCordinateImpl implements HantoCoordinate
 		}
 		return true;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "("+this.getX()+","+this.getY()+")";
+	}
+	
+	public static HantoCordinateImpl convertFromString(String s)
+	{
+		if(s.equals("null"))
+		{
+			return null;
+		}
+		HantoCordinateImpl reValue = null;
+		int start = s.indexOf("(");
+		int middle = s.indexOf(",");
+		int end = s.indexOf(")");
+		
+		try
+		{
+			int x = Integer.parseInt(s.substring(start + 1, middle));
+			int y = Integer.parseInt(s.substring(middle + 1, end));
+			reValue = new HantoCordinateImpl(x,y);
+		}
+		catch(Exception e)
+		{
+			System.out.println("\t" + s + "Here");
+		}
+		
+		return reValue;
+	}
 
 
 }

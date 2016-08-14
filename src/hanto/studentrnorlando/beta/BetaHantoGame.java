@@ -14,9 +14,13 @@ package hanto.studentrnorlando.beta;
 
 
 
+import java.util.List;
+
 import hanto.common.*;
+import hanto.studentrnorlando.common.HantoMove;
 import hanto.studentrnorlando.common.game.HantoBaseSmartGame;
 import hanto.studentrnorlando.factory.HantoBoardFactory;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * Runs a BetaHantoGame back end

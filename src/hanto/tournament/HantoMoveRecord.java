@@ -11,6 +11,7 @@
 package hanto.tournament;
 
 import hanto.common.*;
+import hanto.studentrnorlando.common.HantoCordinateImpl;
 
 /**
  * This class is a data structure that records the move by a
@@ -61,5 +62,31 @@ public class HantoMoveRecord
 	public HantoCoordinate getTo()
 	{
 		return to;
+	}
+	
+	public static HantoMoveRecord convertFromString(String s)
+	{
+		String[] splited = s.split(" ");
+		HantoMoveRecord reValue = null;
+		HantoPieceType pieceType = null;
+		HantoCoordinate from = null;
+		HantoCoordinate to = null;
+		try
+		{
+			pieceType = HantoPieceType.valueOf(splited[0]);
+			from = HantoCordinateImpl.convertFromString(splited[1]);
+			to = HantoCordinateImpl.convertFromString(splited[2]);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace(System.out);
+			System.out.println("Caught 1");
+		}
+		
+		if(to != null && pieceType != null)
+		{
+			reValue = new HantoMoveRecord(pieceType, from, to);
+		}
+		return reValue;
 	}
 }

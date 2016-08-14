@@ -28,6 +28,11 @@ public abstract class HantoBaseSmartMovableGame extends HantoBaseSmartGame {
 		super(board, currentPlayer, nextPlayer, maxNumberofTurns);
 	}
 
+	public List<HantoMoveRecord> getAllPlayersOptions() 
+	{
+		return getAllPlayersOptions(this.currentPlayer.getPlayerColor()); 
+	}
+	
 	public List<HantoMoveRecord> getAllPlayersOptions(HantoPlayerColor player) 
 	{
 		if(currentPlayer.hasPlayedButterFly())

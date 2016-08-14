@@ -57,7 +57,8 @@ public class GUIHantoGameBoard extends HexHantoGameBoard{
 				maxRightLength = currentPoint;
 			}
 		}
-		
+		if(maxRightLength - maxLeftLength <= 0)
+			return 1;
 		return (maxRightLength - maxLeftLength);
 	}
 	// !!! change to memoization

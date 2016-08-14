@@ -10,6 +10,8 @@ import java.util.List;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.studentrnorlando.common.HantoCordinateImpl;
+import hanto.studentrnorlando.common.HantoMove;
 import hanto.studentrnorlando.common.IHantoPlayer;
 import hanto.studentrnorlando.common.board.IHantoGameBoard;
 import hanto.studentrnorlando.common.board.SmartHantoGameBoard;
@@ -40,9 +42,16 @@ public abstract class HantoBaseSmartGame extends HantoBaseGame implements HantoS
 	public List<HantoMoveRecord> getAllPlayersOptions(HantoPlayerColor player) {
 		List<HantoMoveRecord> moveOptions = new ArrayList<HantoMoveRecord>();
 		System.out.println("Base Action: ");
-
+		
+		if(this.turn == 1)
+		{
+			moveOptions.add(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0)));
+			return moveOptions;
+		}
+		
 		List<HantoMoveRecord> gatheredOptions = getBoard().getAllPlayersOptions(player);
 		System.out.println("Base Game report: " + gatheredOptions.size());
+	
 		for(HantoMoveRecord record: gatheredOptions)
 		{
 			if(record.getPiece() == null && record.getFrom() == null )

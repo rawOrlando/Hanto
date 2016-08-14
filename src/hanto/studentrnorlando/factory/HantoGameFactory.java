@@ -13,6 +13,7 @@ package hanto.studentrnorlando.factory;
 import hanto.common.*;
 import hanto.studentrnorlando.alpha.AlphaHantoGame;
 import hanto.studentrnorlando.beta.BetaHantoGame;
+import hanto.studentrnorlando.common.game.HantoModelGame;
 import hanto.studentrnorlando.common.game.HantoSmartGame;
 import hanto.studentrnorlando.delta.DeltaHantoGame;
 import hanto.studentrnorlando.epsilon.EpsilonHantoGame;
@@ -92,6 +93,25 @@ public class HantoGameFactory
 	 */
 	public HantoSmartGame makeSmartHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
 		HantoSmartGame game = null;
+		switch (gameId) {
+			case BETA_HANTO:
+				game = new BetaHantoGame(movesFirst);
+				break;
+			case GAMMA_HANTO:
+				game = new GammaHantoGame(movesFirst);
+				break;
+			case DELTA_HANTO:
+				game = new DeltaHantoGame(movesFirst);
+				break;
+			case EPSILON_HANTO:
+				game = new EpsilonHantoGame(movesFirst);
+				break;
+		}
+		return game;
+	}
+	
+	public HantoModelGame makeHantoModelGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
+		HantoModelGame game = null;
 		switch (gameId) {
 			case BETA_HANTO:
 				game = new BetaHantoGame(movesFirst);

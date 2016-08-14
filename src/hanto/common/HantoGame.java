@@ -10,6 +10,7 @@
 
 package hanto.common;
 
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * The HantoGame interface is the primary interface between the student's code and any
@@ -41,6 +42,8 @@ public interface HantoGame
 	 */
 	MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException;
+	
+	MoveResult makeMove(HantoMoveRecord record) throws HantoException;
 	
 	/**
 	 * @param where the coordinate to query
