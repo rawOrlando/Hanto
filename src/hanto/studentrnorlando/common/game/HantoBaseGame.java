@@ -176,6 +176,7 @@ public abstract class HantoBaseGame implements HantoModelGame{
 	protected void changeTurns()
 	{
 		turn++;
+		System.out.println("turn is " +turn);
 		
 		IHantoPlayer temp = currentPlayer;
 		currentPlayer = nextPlayer;

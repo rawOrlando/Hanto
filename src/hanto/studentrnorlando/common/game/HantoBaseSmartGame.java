@@ -41,14 +41,22 @@ public abstract class HantoBaseSmartGame extends HantoBaseGame implements HantoS
 	@Override
 	public List<HantoMoveRecord> getAllPlayersOptions(HantoPlayerColor player) {
 		List<HantoMoveRecord> moveOptions = new ArrayList<HantoMoveRecord>();
-		System.out.println("Base Action: ");
+		System.out.print("Base Action: ");
 		
 		if(this.turn == 1)
 		{
+			System.out.println("1");
 			moveOptions.add(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0)));
 			return moveOptions;
 		}
+		if(this.turn == 2)
+		{
+			System.out.println("2");
+			moveOptions.add(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
+			return moveOptions;
+		}
 		
+		System.out.println("2");
 		List<HantoMoveRecord> gatheredOptions = getBoard().getAllPlayersOptions(player);
 		System.out.println("Base Game report: " + gatheredOptions.size());
 	

@@ -64,6 +64,22 @@ public class HantoMoveRecord
 		return to;
 	}
 	
+	@Override
+	public String toString()
+	{
+		String reValue =  this.piece.name() + " ";
+		if(from == null)
+		{
+			reValue = reValue + "null ";
+		}
+		else
+		{
+			reValue = reValue + from.toString() + " ";
+		}
+		reValue = reValue + to.toString();
+		return reValue;
+	}
+	
 	public static HantoMoveRecord convertFromString(String s)
 	{
 		String[] splited = s.split(" ");
@@ -80,7 +96,7 @@ public class HantoMoveRecord
 		catch(Exception e)
 		{
 			e.printStackTrace(System.out);
-			System.out.println("Caught 1");
+			System.out.println("Caught");
 		}
 		
 		if(to != null && pieceType != null)

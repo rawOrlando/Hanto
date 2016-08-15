@@ -7,6 +7,7 @@ package hanto.studentrnorlando.gui;
 import javax.swing.JFrame;
 
 import hanto.common.HantoAILevel;
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
@@ -145,6 +146,10 @@ public class MainScreen extends Screen {
 
 					try {
 						game.makeMove(move);
+						for(HantoMoveRecord coordinate: game.getAllPlayersOptions())
+						{
+							System.out.println("\t " + coordinate.toString());
+						}
 						this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer());
 					} catch (HantoException e) {
 						System.out.println("Game Broke");

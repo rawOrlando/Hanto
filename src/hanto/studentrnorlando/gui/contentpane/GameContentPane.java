@@ -72,6 +72,10 @@ public class GameContentPane extends ViewContainer{
 	// make lazy way nt furture
 	public void updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player)
 	{
+
+		placementOptions = new HashMap<HantoPiece, List<HantoCoordinate>>();
+		System.out.println(moves.size() + player.getPlayerColor().toString());
+		
 		this.board = new GUIHantoGameBoard(board);
 		convertMoves(moves);
 		this.player = player;
@@ -81,6 +85,20 @@ public class GameContentPane extends ViewContainer{
 		draw();
 		this.repaint();
 		this.revalidate();
+		
+		System.out.println("Whats still Left");
+		for(HantoPiece thing : placementOptions.keySet() )
+		{
+			System.out.println(placementOptions.get(thing).get(0) +thing.getType().name());
+		}
+		
+		if(this.placementOptions.get(new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY)) != null)
+		{
+			for(HantoCoordinate temp: this.placementOptions.get(HantoPieceType.BUTTERFLY))
+			{
+				System.out.println("\t" +"smaed" + temp.toString());
+			}
+		}
 	}
 	
 	public void convertMoves(List<HantoMoveRecord> moves)
@@ -90,7 +108,7 @@ public class GameContentPane extends ViewContainer{
 		{
 			HantoMoveRecord move = moves.get(0);
 			List<HantoCoordinate> tempList = new ArrayList<HantoCoordinate>();
-			
+			System.out.println("\t" +"adding" + "\t" +move.toString());
 			for(int index = 1; index < moves.size(); index++)
 			{
 				HantoMoveRecord otherMove = moves.get(index);
@@ -98,6 +116,7 @@ public class GameContentPane extends ViewContainer{
 						(move.getFrom() == null && otherMove.getFrom() == null)
 						|| move.getFrom().equals(otherMove.getFrom()))
 				{
+					System.out.println("\t" +"adding" + "\t" + otherMove.toString());
 					tempList.add(otherMove.getTo());
 					moves.remove(otherMove);
 					index--;
@@ -106,13 +125,32 @@ public class GameContentPane extends ViewContainer{
 			tempList.add(move.getTo());
 			if(move.getFrom() == null)
 			{
-				placementOptions.put(new HantoPieceImpl(player.getPlayerColor(), move.getPiece()), tempList);
+				System.out.println("\t" +"convert added " + move.getTo());
+				HantoPieceImpl piece = new HantoPieceImpl(player.getPlayerColor(), move.getPiece());
+				for(HantoCoordinate thing : tempList )
+				{
+					System.out.println("\t" +"\t" + piece.getType().name() + (new HantoCordinateImpl(thing)).toString());
+				}
+				placementOptions.put(piece, tempList);
 			}
 			else
 			{
 				options.put(move.getFrom(), tempList);
 			}
 			moves.remove(move);
+		}
+		if(placementOptions.size() == 0)
+		{
+			
+			System.out.println("Failed to convert Moves");
+		}
+		else
+		{
+			System.out.println("Whats Left");
+			for(HantoPiece thing : placementOptions.keySet() )
+			{
+				System.out.println(placementOptions.get(thing).get(0));
+			}
 		}
 	}
 	
@@ -158,8 +196,10 @@ public class GameContentPane extends ViewContainer{
 	public void drawOptions(List<HantoCoordinate> options)
 	{
 		currentOptionsTiles.clear();
+		System.out.println("\t " + options.size());
 		for(HantoCoordinate coordinate: options)
 		{
+			System.out.println("\t " + coordinate.toString());
 			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
 	}
@@ -223,14 +263,19 @@ public class GameContentPane extends ViewContainer{
 				            // event handler called when countJButton is pressed
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								// TODO Auto-generated method stub
-								pieceMove(tile.getCordinate(), tile.getPiece());
 								
+								System.out.println("Clicked the button");
+								pieceMove(tile.getCordinate(), tile.getPiece());
 							}
 
 				         }); // end anonymous inner class
 				super.add(button);
 			}
+			for(HantoPiece thing : placementOptions.keySet() )
+			{
+				System.out.println("AfterAdding:"+placementOptions.get(thing).get(0) +thing.getType().name());
+			}
+
 			
 		}
 		return temp;
@@ -239,6 +284,19 @@ public class GameContentPane extends ViewContainer{
 	
 	private void pieceMove(HantoCoordinate cordinate, HantoPiece piece)
 	{
+		if(piece == null)
+		{
+			System.out.println("piece Move");
+		}
+		else System.out.println("piece Move: " + piece.getType().getPrintableName());
+		if(this.placementOptions.get(HantoPieceType.BUTTERFLY) != null)
+		{
+			for(HantoCoordinate temp: this.placementOptions.get(HantoPieceType.BUTTERFLY))
+			{
+				System.out.println("\t" +"smaed" + temp.toString());
+			}
+		}
+		
 		if (piece != null)
 			startMove(cordinate, piece);
 		else
@@ -250,6 +308,7 @@ public class GameContentPane extends ViewContainer{
 		clearOptions();
 		lastPieceClickedLocation = cordinate;
 		pieceMove = piece;
+		System.out.println("\t startMove");
 		showOptions(lastPieceClickedLocation, pieceMove);
 			
 	}
@@ -284,12 +343,14 @@ public class GameContentPane extends ViewContainer{
 		}
 		else
 		{
+			System.out.println("\t Placement");
 			showPlaceOptions(piece);
 		}
 	}
 	
 	public void showPlaceOptions(HantoPiece piece)
 	{
+		System.out.println("\t \t" + placementOptions.size() );
 		if(placementOptions.get(piece) != null)
 		{
 			drawOptions(placementOptions.get(piece));
@@ -297,9 +358,16 @@ public class GameContentPane extends ViewContainer{
 		}
 		for(HantoPiece piece1: placementOptions.keySet())
 		{
-			// this should not be this bad...
-			if(piece1.equals(piece))
+			System.out.println("\t \t Null");
+			for (HantoCoordinate cor :placementOptions.get(piece1))
 			{
+				System.out.println("\t\t " + cor);
+			}
+			// this should not be this bad...
+			if(piece1.getType().equals(piece.getType()))
+			{
+				
+				System.out.println("\t Drawing");
 				drawOptions(placementOptions.get(piece1));
 				this.repaint();
 				return;
