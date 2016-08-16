@@ -11,6 +11,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 import hanto.studentrnorlando.Driver;
 import hanto.studentrnorlando.common.game.HantoBaseSmartGame;
 import hanto.studentrnorlando.common.game.HantoModelGame;
@@ -56,7 +57,7 @@ public class MainScreen extends Screen {
 		gameType = HantoGameID.ALPHA_HANTO;
 		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK);
 		//Move this !!!
-		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer());
+		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
 	}
 	
 	public MainScreen(Driver model)
@@ -83,6 +84,12 @@ public class MainScreen extends Screen {
 			if(splited[1].equals("Settings"))
 			{
 				this.changeUserInterface(SettingPane);
+				return true;
+			}
+			if(splited[1].equals("Game"))
+			{
+				//!!! change so it creates game based on setting dessisions
+				this.changeUserInterface(GamePane);
 				return true;
 			}
 		}
@@ -143,14 +150,9 @@ public class MainScreen extends Screen {
 				HantoMoveRecord move = HantoMoveRecord.convertFromString(splited[1] + " " + splited[2] + " " + splited[3] + " ");
 				if(move != null)
 				{
-
 					try {
-						game.makeMove(move);
-						for(HantoMoveRecord coordinate: game.getAllPlayersOptions())
-						{
-							System.out.println("\t " + coordinate.toString());
-						}
-						this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer());
+						MoveResult result = game.makeMove(move);
+						this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), result);
 					} catch (HantoException e) {
 						System.out.println("Game Broke");
 						e.printStackTrace();
@@ -184,7 +186,7 @@ public class MainScreen extends Screen {
 	 */
 	private void createUserInterface()
 	{
-		this.changeUserInterface(GamePane);        
+		this.changeUserInterface(HomePane);        
 	}
 	
 	/**

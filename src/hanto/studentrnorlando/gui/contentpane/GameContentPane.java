@@ -1,6 +1,8 @@
 package hanto.studentrnorlando.gui.contentpane;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hanto.common.HantoCoordinate;
@@ -18,6 +21,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 import hanto.studentrnorlando.beta.BetaHantoPlayer;
 import hanto.studentrnorlando.common.GeneralHantoPlayer;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
@@ -57,6 +61,8 @@ public class GameContentPane extends ViewContainer{
 	IHantoPlayer player;
 	int numberOfPieces = 0;
 	
+	MoveResult gameResult = null;
+	
 	//!!! test delete later
 	JButton button;
 	
@@ -70,9 +76,10 @@ public class GameContentPane extends ViewContainer{
 	}
 	
 	// make lazy way nt furture
-	public void updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player)
+	public void updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player, MoveResult result)
 	{
-
+		gameResult = result;
+		
 		placementOptions = new HashMap<HantoPiece, List<HantoCoordinate>>();
 		System.out.println(moves.size() + player.getPlayerColor().toString());
 		
@@ -86,18 +93,9 @@ public class GameContentPane extends ViewContainer{
 		this.repaint();
 		this.revalidate();
 		
-		System.out.println("Whats still Left");
-		for(HantoPiece thing : placementOptions.keySet() )
+		if(gameResult != null && !gameResult.equals(MoveResult.OK))
 		{
-			System.out.println(placementOptions.get(thing).get(0) +thing.getType().name());
-		}
-		
-		if(this.placementOptions.get(new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY)) != null)
-		{
-			for(HantoCoordinate temp: this.placementOptions.get(HantoPieceType.BUTTERFLY))
-			{
-				System.out.println("\t" +"smaed" + temp.toString());
-			}
+			placementOptions = null;
 		}
 	}
 	
@@ -181,6 +179,10 @@ public class GameContentPane extends ViewContainer{
 	{
 		drawTiles();
 		drawPlayerUnPlayedPieces();
+		if(gameResult != null && !gameResult.equals(MoveResult.OK))
+		{
+			drawGameOver();
+		}
 		//drawOptions();
 	}
 	
@@ -202,6 +204,19 @@ public class GameContentPane extends ViewContainer{
 			System.out.println("\t " + coordinate.toString());
 			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
+	}
+	
+	public void drawGameOver()
+	{
+		System.out.println("DrawingGameOver");
+		JLabel label = new JLabel();
+		label.setBounds(0, 0, 800, 200);
+		label.setText(gameResult.name());
+		Font labelFont = label.getFont();
+		int newFontSize = (int)(labelFont.getSize() * 7);
+		label.setFont(new Font(labelFont.getName(), Font.PLAIN, newFontSize));
+		label.setForeground(Color.BLUE);
+		this.add(label);
 	}
 	
 	public JGameTile drawTile(HantoPiece piece, HantoCoordinate coordinate)
@@ -245,6 +260,7 @@ public class GameContentPane extends ViewContainer{
 	//Done with Bag
 	//
 	
+	
 	@Override
 	public Component add(Component comp)
 	{
@@ -264,18 +280,12 @@ public class GameContentPane extends ViewContainer{
 							@Override
 							public void actionPerformed(ActionEvent e) {
 								
-								System.out.println("Clicked the button");
 								pieceMove(tile.getCordinate(), tile.getPiece());
 							}
 
 				         }); // end anonymous inner class
 				super.add(button);
 			}
-			for(HantoPiece thing : placementOptions.keySet() )
-			{
-				System.out.println("AfterAdding:"+placementOptions.get(thing).get(0) +thing.getType().name());
-			}
-
 			
 		}
 		return temp;
@@ -283,20 +293,7 @@ public class GameContentPane extends ViewContainer{
 	}
 	
 	private void pieceMove(HantoCoordinate cordinate, HantoPiece piece)
-	{
-		if(piece == null)
-		{
-			System.out.println("piece Move");
-		}
-		else System.out.println("piece Move: " + piece.getType().getPrintableName());
-		if(this.placementOptions.get(HantoPieceType.BUTTERFLY) != null)
-		{
-			for(HantoCoordinate temp: this.placementOptions.get(HantoPieceType.BUTTERFLY))
-			{
-				System.out.println("\t" +"smaed" + temp.toString());
-			}
-		}
-		
+	{	
 		if (piece != null)
 			startMove(cordinate, piece);
 		else
@@ -308,7 +305,6 @@ public class GameContentPane extends ViewContainer{
 		clearOptions();
 		lastPieceClickedLocation = cordinate;
 		pieceMove = piece;
-		System.out.println("\t startMove");
 		showOptions(lastPieceClickedLocation, pieceMove);
 			
 	}
@@ -343,41 +339,34 @@ public class GameContentPane extends ViewContainer{
 		}
 		else
 		{
-			System.out.println("\t Placement");
 			showPlaceOptions(piece);
 		}
 	}
 	
 	public void showPlaceOptions(HantoPiece piece)
 	{
-		System.out.println("\t \t" + placementOptions.size() );
-		if(placementOptions.get(piece) != null)
+		if(placementOptions != null)
 		{
-			drawOptions(placementOptions.get(piece));
-			this.repaint();
-		}
-		for(HantoPiece piece1: placementOptions.keySet())
-		{
-			System.out.println("\t \t Null");
-			for (HantoCoordinate cor :placementOptions.get(piece1))
+			if (placementOptions.get(piece) != null)
 			{
-				System.out.println("\t\t " + cor);
-			}
-			// this should not be this bad...
-			if(piece1.getType().equals(piece.getType()))
-			{
-				
-				System.out.println("\t Drawing");
-				drawOptions(placementOptions.get(piece1));
+				drawOptions(placementOptions.get(piece));
 				this.repaint();
-				return;
+			}
+			for(HantoPiece piece1: placementOptions.keySet())
+			{
+				// this should not be this bad... !!!
+				if(piece1.getType().equals(piece.getType()))
+				{
+					drawOptions(placementOptions.get(piece1));
+					this.repaint();
+					return;
+				}
 			}
 		}
 	}
 	
 	public void showMoveOptions(HantoCoordinate cordinate)
-	{
-		
+	{	
 		if(options.get(cordinate) != null)
 		{
 			drawOptions(options.get(cordinate));
