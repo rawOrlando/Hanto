@@ -58,8 +58,7 @@ public class SettingsContentPane extends ViewContainer{
 	
 	private void setupHomeButton()
 	{
-		//create home Button
-		// change to icon
+		//create home Button\
 		JButton playButton = new JButton("HOME");
  	    playButton.setBounds( 100, 100, 170, 50 );
  	    this.add(playButton);

@@ -177,12 +177,13 @@ public class GameContentPane extends ViewContainer{
 	//!!! cahgne it so Optionsant tiles are same (stop using board. Jsut store a map brain is else where)
 	public void draw()
 	{
-		drawTiles();
-		drawPlayerUnPlayedPieces();
 		if(gameResult != null && !gameResult.equals(MoveResult.OK))
 		{
 			drawGameOver();
 		}
+		drawTiles();
+		drawPlayerUnPlayedPieces();
+		
 		//drawOptions();
 	}
 	
@@ -206,7 +207,13 @@ public class GameContentPane extends ViewContainer{
 		}
 	}
 	
-	public void drawGameOver()
+	private void drawGameOver()
+	{
+		drawHomeButton();
+		drawWinningText();
+	}
+	
+	private void drawWinningText()
 	{
 		System.out.println("DrawingGameOver");
 		JLabel label = new JLabel();
@@ -219,7 +226,27 @@ public class GameContentPane extends ViewContainer{
 		this.add(label);
 	}
 	
-	public JGameTile drawTile(HantoPiece piece, HantoCoordinate coordinate)
+	private void drawHomeButton()
+	{
+		JButton playButton = new JButton("HOME");
+ 	    playButton.setBounds( 200, 200, 170, 50 );
+ 	    this.add(playButton);
+ 	    playButton.addActionListener(
+
+ 	         new ActionListener() // anonymous inner class
+ 	         {
+ 	            // event handler called when countJButton is pressed
+ 				@Override
+ 				public void actionPerformed(ActionEvent e) {
+ 					// TODO Auto-generated method stub
+ 					
+ 					handler.doAction("GoTo Home");
+ 				}
+
+ 	         }); // end anonymous inner class
+	}
+	
+	private JGameTile drawTile(HantoPiece piece, HantoCoordinate coordinate)
 	{
 		JGameTile tile = new JGameTile(piece, coordinate);
 		tile.setBounds(initXOffset, initYOffset, tileSize, tileSize);
