@@ -35,6 +35,7 @@ public class BetaHantoGameBoard extends HexHantoGameBoard {
 	public boolean checkValidPlayLocation(HantoCoordinate where) throws HantoException {
 		if(getPieceAt(where) != null)
 		{
+			System.out.println("SomeOne is alreadyThere");
 			throw new HantoException("Invlaid Play Location: There is already a piece there.");
 		}
 		else if(!isAdjacentToSomeOne(where))

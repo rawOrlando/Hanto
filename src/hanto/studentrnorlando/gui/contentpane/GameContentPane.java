@@ -114,7 +114,7 @@ public class GameContentPane extends ViewContainer{
 				HantoMoveRecord otherMove = moves.get(index);
 				if(move.getPiece() != null && move.getPiece().equals(otherMove.getPiece()) &&
 						(move.getFrom() == null && otherMove.getFrom() == null)
-						|| move.getFrom().equals(otherMove.getFrom()))
+						|| (move.getFrom() != null && move.getFrom().equals(otherMove.getFrom())))
 				{
 					System.out.println("\t" +"adding" + "\t" + otherMove.toString());
 					tempList.add(otherMove.getTo());

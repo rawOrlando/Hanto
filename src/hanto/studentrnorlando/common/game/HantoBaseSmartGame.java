@@ -43,20 +43,6 @@ public abstract class HantoBaseSmartGame extends HantoBaseGame implements HantoS
 		List<HantoMoveRecord> moveOptions = new ArrayList<HantoMoveRecord>();
 		System.out.print("Base Action: ");
 		
-		if(this.turn == 1)
-		{
-			System.out.println("1");
-			moveOptions.add(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(0,0)));
-			return moveOptions;
-		}
-		if(this.turn == 2)
-		{
-			System.out.println("2");
-			moveOptions.add(new HantoMoveRecord(HantoPieceType.BUTTERFLY, null, new HantoCordinateImpl(1,0)));
-			return moveOptions;
-		}
-		
-		System.out.println("2");
 		List<HantoMoveRecord> gatheredOptions = getBoard().getAllPlayersOptions(player);
 		System.out.println("Base Game report: " + gatheredOptions.size());
 	
@@ -66,6 +52,7 @@ public abstract class HantoBaseSmartGame extends HantoBaseGame implements HantoS
 			{
 				if(record.getTo() != null)
 				{
+					System.out.println("Smart Game has a movement move" );
 					HantoCoordinate destination = record.getTo();
 					//get all piece a player can place
 					for(HantoPieceType option: currentPlayer.getPieceOptions())

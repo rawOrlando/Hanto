@@ -191,9 +191,18 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 	public List<HantoMoveRecord> getAllPlayerPlacementMoves(HantoPlayerColor player)
 	{
 		List<HantoMoveRecord> returnList = new ArrayList<HantoMoveRecord>();
+		if(pieces.size() == 1)
+		{
+			for(HantoCoordinate nieghbor :this.getNieghboringSpots(new HantoCordinateImpl(0,0)))
+			{
+				returnList.add(new HantoMoveRecord(null, null, nieghbor));
+			}
+			return returnList;
+		}
 		for (HantoCoordinate cordinate : pieces.keySet()) 
 		 {
-			 	if(pieces.get(cordinate) != null && pieces.get(cordinate).getColor() == player)
+			//!!! un sure if should check color ?!!!
+			 	if(pieces.get(cordinate) != null )//&& pieces.get(cordinate).getColor() == player)
 			 	{
 			 		List<HantoCoordinate> list = this.getNieghboringSpots(cordinate);
 			 		for(HantoCoordinate nieghbor : list)
@@ -211,12 +220,17 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 			 			}
 			 			if(add)
 			 			{
-			 				returnList.add(new HantoMoveRecord(null, null, cordinate));
+			 				returnList.add(new HantoMoveRecord(null, null, nieghbor));
+			 				add = false;
 			 			}
 			 		}
 			 		
 			 	}
 		 }
+		if(pieces.isEmpty())
+		{
+			returnList.add(new HantoMoveRecord(null, null, new HantoCordinateImpl(0,0)));
+		}
 		
 			 	
 		return returnList;
