@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
@@ -57,7 +58,16 @@ public abstract class HantoBaseSmartGame extends HantoBaseGame implements HantoS
 					//get all piece a player can place
 					for(HantoPieceType option: currentPlayer.getPieceOptions())
 					{
-						moveOptions.add(new HantoMoveRecord(option, null, destination));
+						boolean add = true;
+						try 
+						{
+							this.canPlayPiece(option, destination);
+						} 
+						catch (HantoException e) 
+						{
+							add = false;
+						}
+						if(add) moveOptions.add(new HantoMoveRecord(option, null, destination));
 					}
 					
 				}

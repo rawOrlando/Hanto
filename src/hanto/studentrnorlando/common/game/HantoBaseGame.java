@@ -159,13 +159,14 @@ public abstract class HantoBaseGame implements HantoModelGame{
 	public void canPlayPiece(HantoPieceType pieceType, HantoCoordinate where) throws HantoException
 	{	
 		//check to see if butterFly is Played
-		if(turn > NUMBEROFPLAYERS*(TURNSTILLBUTTERFLY - 1) 
-				&& !currentPlayer.hasPlayedButterFly())
+		if(turn >= NUMBEROFPLAYERS*(TURNSTILLBUTTERFLY - 1) 
+				&& !currentPlayer.hasPlayedButterFly()
+				&& !pieceType.equals(HantoPieceType.BUTTERFLY))
 		{
 			throw new HantoException("Need To Play ButterFly");
 		}
-		
-		getBoard().checkValidPlayLocationForPiece(where, new HantoPieceImpl(currentPlayer.getPlayerColor(), pieceType));
+		if(turn >= 1)
+			getBoard().checkValidPlayLocationForPiece(where, new HantoPieceImpl(currentPlayer.getPlayerColor(), pieceType));
 		
 		
 	}

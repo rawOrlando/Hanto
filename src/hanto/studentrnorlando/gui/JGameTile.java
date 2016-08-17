@@ -83,7 +83,6 @@ public class JGameTile extends JLabel {
 		try {
 			img = ImageIO.read(new File(fileName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block !!!
 			//e.printStackTrace();
 			//This should never happen... 
 			return;
@@ -119,9 +118,9 @@ public class JGameTile extends JLabel {
 		JButton button = new JButton();
 		
 		Rectangle rec = this.getBounds();
-		double demension = .55;
-		double demensionX = .87;
-		double demensionY = .80;
+		double demension = .53;
+		double demensionX = .85;
+		double demensionY = .75;
 		
 		button.setBounds((int)(rec.getX() + (rec.getWidth()*demension/8)),
 				(int)(rec.getY() + (rec.getHeight()*demension/2)),
@@ -129,8 +128,8 @@ public class JGameTile extends JLabel {
 				(int)(rec.getHeight()*demension));
 		
 		
-		demension = .44;
-		demensionX = .55;
+		demension = .47;
+		demensionX = .53;
 		
 		JButton button2 = new JButton();
 		
