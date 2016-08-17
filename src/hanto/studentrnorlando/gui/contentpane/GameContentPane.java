@@ -76,7 +76,7 @@ public class GameContentPane extends ViewContainer{
 	}
 	
 	// make lazy way nt furture
-	public void updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player, MoveResult result)
+	public boolean updateGame(IHantoGameBoard board, List<HantoMoveRecord> moves, IHantoPlayer player, MoveResult result)
 	{
 		gameResult = result;
 		
@@ -96,7 +96,9 @@ public class GameContentPane extends ViewContainer{
 		if(gameResult != null && !gameResult.equals(MoveResult.OK))
 		{
 			placementOptions = null;
+			return true;
 		}
+		return false;
 	}
 	
 	public void convertMoves(List<HantoMoveRecord> moves)
@@ -161,7 +163,7 @@ public class GameContentPane extends ViewContainer{
 		
 		//figure out Y
 		boardLength = board.getYBoardLength();
-		int yTileSize = (450) / (boardLength +2);
+		int yTileSize = (540) / (boardLength +2);
 		tileSize = Math.min(xTileSize, yTileSize);
 		
 		//Figure out off set
@@ -215,7 +217,6 @@ public class GameContentPane extends ViewContainer{
 	
 	private void drawWinningText()
 	{
-		System.out.println("DrawingGameOver");
 		JLabel label = new JLabel();
 		label.setBounds(0, 0, 800, 200);
 		label.setText(gameResult.name());

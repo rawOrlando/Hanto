@@ -43,6 +43,8 @@ public class MainScreen extends Screen {
 	
 	private HantoModelGame game;
 	
+	private boolean gameOver;
+	
 	/**
 	 * Contructor, if you don't want to play the game
 	 */
@@ -88,6 +90,7 @@ public class MainScreen extends Screen {
 			}
 			if(splited[1].equals("Game"))
 			{
+				createGame();
 				//!!! change so it creates game based on setting dessisions
 				this.changeUserInterface(GamePane);
 				return true;
@@ -150,9 +153,10 @@ public class MainScreen extends Screen {
 				HantoMoveRecord move = HantoMoveRecord.convertFromString(splited[1] + " " + splited[2] + " " + splited[3] + " ");
 				if(move != null)
 				{
+					
 					try {
 						MoveResult result = game.makeMove(move);
-						this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), result);
+						gameOver = this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), result);
 					} catch (HantoException e) {
 						System.out.println("Game Broke");
 						e.printStackTrace();
@@ -166,6 +170,20 @@ public class MainScreen extends Screen {
 			}
 		}
 		return super.doAction(actionLine);
+	}
+	
+	private void createGame()
+	{
+		//!!! will need more for this later
+		if(gameOver)
+		{
+			
+			this.GamePane = new GameContentPane(this, HantoGameID.BETA_HANTO);
+			
+			game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK);
+			
+			GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
+		}
 	}
 	
 	/**

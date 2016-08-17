@@ -87,10 +87,10 @@ public class GUIHantoGameBoard extends HexHantoGameBoard{
 		int maxLowestLength = Integer.MAX_VALUE;
 		for(HantoCoordinate coordinate: pieces.keySet())
 		{
-			int currentPoint = coordinate.getY() * -1;
+			int currentPoint = coordinate.getY();
 			if(maxHighestLength < currentPoint)
 			{
-				maxHighestLength= currentPoint;
+				maxHighestLength = currentPoint;
 			}
 			if(maxLowestLength > currentPoint)
 			{
@@ -106,7 +106,7 @@ public class GUIHantoGameBoard extends HexHantoGameBoard{
 		int maxHighestLength = Integer.MIN_VALUE; 
 		for(HantoCoordinate coordinate: pieces.keySet())
 		{
-			int currentPoint = coordinate.getY() * -1;
+			int currentPoint = coordinate.getY();
 			if(maxHighestLength < currentPoint)
 			{
 				maxHighestLength = currentPoint;
