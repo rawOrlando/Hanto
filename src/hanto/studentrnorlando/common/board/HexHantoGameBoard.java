@@ -208,7 +208,7 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 			 		for(HantoCoordinate nieghbor : list)
 			 		{
 			 			
-			 			if(tryPlayerPlacementMove(nieghbor, player))
+			 			if(tryPlayerPlacementMove(nieghbor, player) && !returnList.contains(new HantoMoveRecord(null, null, nieghbor)))
 			 			{
 			 				returnList.add(new HantoMoveRecord(null, null, nieghbor));
 

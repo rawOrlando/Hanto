@@ -52,14 +52,15 @@ public class MainScreen extends Screen {
 	{
 		HomePane = new HomeContentPane(this);
 		SettingPane = new SettingsContentPane(this);
-		GamePane = new GameContentPane(this, HantoGameID.DELTA_HANTO);
+		GamePane = new GameContentPane(this, HantoGameID.GAMMA_HANTO);
 		this.createUserInterface();
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		numberOfPlayers = 2;
-		gameType = HantoGameID.DELTA_HANTO;
-		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLACK);
+		gameType = HantoGameID.GAMMA_HANTO;
+		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK);
 		//Move this !!!
 		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	public MainScreen(Driver model)
@@ -178,9 +179,9 @@ public class MainScreen extends Screen {
 		if(gameOver)
 		{
 			
-			this.GamePane = new GameContentPane(this, HantoGameID.BETA_HANTO);
+			this.GamePane = new GameContentPane(this, HantoGameID.GAMMA_HANTO);
 			
-			game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK);
+			game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK);
 			
 			GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
 		}

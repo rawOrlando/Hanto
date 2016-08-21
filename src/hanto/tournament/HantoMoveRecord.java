@@ -65,6 +65,45 @@ public class HantoMoveRecord
 	}
 	
 	@Override
+	public boolean equals(Object other)
+	{
+		if(other == null)
+		{
+			return false;
+		}
+		if(other.getClass() != this.getClass())
+		{
+			return false;
+		}
+		HantoMoveRecord otherRecord =  (HantoMoveRecord) other;
+		if(otherRecord.getPiece() ==  null ^ this.getPiece() == null)
+		{
+			return false;
+		}
+		if(otherRecord.getFrom() == null ^ this.getFrom() == null)
+		{
+			return false;
+		}
+		if(otherRecord.getTo() == null  ^ this.getTo() == null)
+		{
+			return false;
+		}
+		if(this.getPiece() != null && !this.getPiece().equals(otherRecord.getPiece()))
+		{
+			return false;
+		}
+		if(this.getFrom() != null && !this.getFrom().equals(otherRecord.getFrom()))
+		{
+			return false;
+		}
+		if(this.getTo() != null && !this.getTo().equals(otherRecord.getTo()))
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
 	public String toString()
 	{
 		String reValue =  this.piece.name() + " ";

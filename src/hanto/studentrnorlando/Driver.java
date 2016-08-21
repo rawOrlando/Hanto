@@ -1,7 +1,5 @@
 package hanto.studentrnorlando;
 
-import javax.swing.JFrame;
-
 import hanto.studentrnorlando.gui.MainScreen;
 
 public class Driver 

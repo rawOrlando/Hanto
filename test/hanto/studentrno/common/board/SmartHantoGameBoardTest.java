@@ -164,7 +164,7 @@ public class SmartHantoGameBoardTest
 	}
 	
 	@Test
-	public void gammaReturnOptionsOnThirdTurnClustered()
+	public void gammaReturnOptionsOnThirdTurnClusteredAsWhite()
 	{
 		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
 		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
@@ -187,6 +187,84 @@ public class SmartHantoGameBoardTest
 		assertEquals(placementList.size(), 2);
 		assertEquals(playList.size(), 2);
 		assertEquals(list.size(), 4);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnThirdTurnNonClusteredAsWhite()
+	{
+		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.WHITE);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 3);
+		assertEquals(playList.size(), 2);
+		assertEquals(list.size(), 5);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnThirdTurnClusteredAsBlack()
+	{
+		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.BLACK);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 6);
+		assertEquals(playList.size(), 4);
+		assertEquals(list.size(), 10);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnThirdTurnNonClusteredAsBLACK()
+	{
+		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.BLACK);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 5);
+		assertEquals(playList.size(), 2);
+		assertEquals(list.size(), 7);
 	}
 
 }

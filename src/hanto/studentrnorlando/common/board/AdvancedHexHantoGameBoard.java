@@ -399,11 +399,10 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 	public List<HantoMoveRecord> getAllPlayersOptions(HantoPlayerColor player)
 	{
 		List<HantoMoveRecord> returnList = getAllPlayerMovementMoves(player);
-		System.out.println(returnList.size());
-		//returnList.addAll(getAllPlayerPlacementMoves(player));
 		List<HantoMoveRecord> placementPieces = getAllPlayerPlacementMoves(player);
-		System.out.println(placementPieces.size());
-		/*List<HantoMoveRecord>*/ returnList.addAll(placementPieces);
+		
+		returnList.addAll(placementPieces);
+		
 		return returnList;
 	}
 	
@@ -447,8 +446,6 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 					}
 					if(add)
 					{
-	
-						System.out.println("checking for movement options, added  ");
 						if(piece.getType() == null)
 						{
 							System.out.println("piece missing type...");

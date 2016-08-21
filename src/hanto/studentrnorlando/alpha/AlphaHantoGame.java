@@ -14,6 +14,7 @@ package hanto.studentrnorlando.alpha;
 
 import hanto.common.*;
 import hanto.studentrnorlando.common.*;
+import hanto.tournament.HantoMoveRecord;
 
 import static hanto.common.MoveResult.*;
 import static hanto.common.HantoPieceType.*;
@@ -98,6 +99,11 @@ public class AlphaHantoGame implements HantoGame
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public MoveResult makeMove(HantoMoveRecord record) throws HantoException {
+		return this.makeMove(record.getPiece(), record.getFrom(), record.getTo());
 	}
 
 }
