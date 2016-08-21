@@ -84,7 +84,18 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 			throw new HantoException("Invlaid Move: That is not a " + piece.getType() + " piece.");
 		}
 		
-		this.checkValidPlayLocation(to);
+		try
+		{
+			this.checkValidPlayLocation(to);
+		}
+		catch(HantoException e)
+		{
+			if(checking)
+			{
+				playPiece(from, new HantoPieceImpl(pickedUpPiece.getColor(), pickedUpPiece.getType()));
+			}
+			throw e;
+		}
 		
 		if(checking)
 		{
@@ -387,9 +398,12 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 	@Override
 	public List<HantoMoveRecord> getAllPlayersOptions(HantoPlayerColor player)
 	{
-		//List<HantoMoveRecord> returnList = getAllPlayerMovementMoves(player);
+		List<HantoMoveRecord> returnList = getAllPlayerMovementMoves(player);
+		System.out.println(returnList.size());
 		//returnList.addAll(getAllPlayerPlacementMoves(player));
-		List<HantoMoveRecord> returnList = getAllPlayerPlacementMoves(player);
+		List<HantoMoveRecord> placementPieces = getAllPlayerPlacementMoves(player);
+		System.out.println(placementPieces.size());
+		/*List<HantoMoveRecord>*/ returnList.addAll(placementPieces);
 		return returnList;
 	}
 	
@@ -402,7 +416,7 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 		}
 		catch(HantoException e)
 		{
-				return false;
+			return false;
 		}
 		return true;
 	}
@@ -417,27 +431,32 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 		List<HantoMoveRecord> returnList = new ArrayList<HantoMoveRecord>();
 		for(HantoPieceImpl piece : getPlayersPieces(player))
  		{
-			for(HantoCoordinate spot : getEdgeSpots())
-	 		{
-				boolean add = false;
-				try
-				{
-					add = true;
-					this.movePiece(piece.getCordinate(), spot, piece, true);
-				}
-				catch(HantoException e)
-				{
-					add = false;
-				}
-				if(add)
-				{
-					if(piece.getType() == null)
+			if(piece != null && piece.getType() != null)
+			{
+				for(HantoCoordinate spot : getEdgeSpots())
+		 		{
+					boolean add = false;
+					try
 					{
-						System.out.println("piece missing type...");
+						add = true;
+						this.movePiece(piece.getCordinate(), spot, piece, true);
 					}
-					returnList.add(new HantoMoveRecord(piece.getType(), piece.getCordinate(), spot));
-				}
-	 		}
+					catch(HantoException e)
+					{
+						add = false;
+					}
+					if(add)
+					{
+	
+						System.out.println("checking for movement options, added  ");
+						if(piece.getType() == null)
+						{
+							System.out.println("piece missing type...");
+						}
+						returnList.add(new HantoMoveRecord(piece.getType(), piece.getCordinate(), spot));
+					}
+		 		}
+			}
  		}
 		return returnList;
 	}
