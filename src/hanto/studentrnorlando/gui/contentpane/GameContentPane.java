@@ -81,7 +81,6 @@ public class GameContentPane extends ViewContainer{
 		gameResult = result;
 		
 		placementOptions = new HashMap<HantoPiece, List<HantoCoordinate>>();
-		System.out.println(moves.size() + player.getPlayerColor().toString());
 		
 		this.board = new GUIHantoGameBoard(board);
 		convertMoves(moves);
@@ -108,7 +107,6 @@ public class GameContentPane extends ViewContainer{
 		{
 			HantoMoveRecord move = moves.get(0);
 			List<HantoCoordinate> tempList = new ArrayList<HantoCoordinate>();
-			System.out.println("\t" +"adding" + "\t" +move.toString());
 			for(int index = 1; index < moves.size(); index++)
 			{
 				HantoMoveRecord otherMove = moves.get(index);
@@ -116,7 +114,6 @@ public class GameContentPane extends ViewContainer{
 						(move.getFrom() == null && otherMove.getFrom() == null)
 						|| (move.getFrom() != null && move.getFrom().equals(otherMove.getFrom())))
 				{
-					System.out.println("\t" +"adding" + "\t" + otherMove.toString());
 					tempList.add(otherMove.getTo());
 					moves.remove(otherMove);
 					index--;
@@ -125,12 +122,7 @@ public class GameContentPane extends ViewContainer{
 			tempList.add(move.getTo());
 			if(move.getFrom() == null)
 			{
-				System.out.println("\t" +"convert added " + move.getTo());
 				HantoPieceImpl piece = new HantoPieceImpl(player.getPlayerColor(), move.getPiece());
-				for(HantoCoordinate thing : tempList )
-				{
-					System.out.println("\t" +"\t" + piece.getType().name() + (new HantoCordinateImpl(thing)).toString());
-				}
 				placementOptions.put(piece, tempList);
 			}
 			else
@@ -138,19 +130,6 @@ public class GameContentPane extends ViewContainer{
 				options.put(move.getFrom(), tempList);
 			}
 			moves.remove(move);
-		}
-		if(placementOptions.size() == 0)
-		{
-			
-			System.out.println("Failed to convert Moves");
-		}
-		else
-		{
-			System.out.println("Whats Left");
-			for(HantoPiece thing : placementOptions.keySet() )
-			{
-				System.out.println(placementOptions.get(thing).get(0));
-			}
 		}
 	}
 	
@@ -201,10 +180,8 @@ public class GameContentPane extends ViewContainer{
 	public void drawOptions(List<HantoCoordinate> options)
 	{
 		currentOptionsTiles.clear();
-		System.out.println("\t " + options.size());
 		for(HantoCoordinate coordinate: options)
 		{
-			System.out.println("\t " + coordinate.toString());
 			currentOptionsTiles.add(drawTile(null, coordinate));
 		}
 	}

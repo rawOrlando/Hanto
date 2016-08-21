@@ -52,12 +52,12 @@ public class MainScreen extends Screen {
 	{
 		HomePane = new HomeContentPane(this);
 		SettingPane = new SettingsContentPane(this);
-		GamePane = new GameContentPane(this, HantoGameID.ALPHA_HANTO);
+		GamePane = new GameContentPane(this, HantoGameID.DELTA_HANTO);
 		this.createUserInterface();
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		numberOfPlayers = 2;
-		gameType = HantoGameID.ALPHA_HANTO;
-		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.BETA_HANTO, HantoPlayerColor.BLACK);
+		gameType = HantoGameID.DELTA_HANTO;
+		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLACK);
 		//Move this !!!
 		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
 	}

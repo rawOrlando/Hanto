@@ -394,37 +394,17 @@ public class AdvancedHexHantoGameBoard extends HexHantoGameBoard {
 	}
 	
 	@Override
-	public List<HantoMoveRecord> getAllPlayerPlacementMoves(HantoPlayerColor player)
+	protected boolean tryPlayerPlacementMove(HantoCoordinate where, HantoPlayerColor player)
 	{
-		List<HantoMoveRecord> returnList = new ArrayList<HantoMoveRecord>();
-		for (HantoCoordinate cordinate : pieces.keySet()) 
-		 {
-			 	if(pieces.get(cordinate) != null && pieces.get(cordinate).getColor() == player)
-			 	{
-			 		List<HantoCoordinate> list = this.getNieghboringSpots(cordinate);
-			 		for(HantoCoordinate nieghbor : list)
-			 		{
-			 			boolean add = false;
-			 			try
-			 			{
-			 				add = true;
-				 			this.checkValidPlaceLocation(nieghbor, HantoPlayerColor.getOtherColor(player));
-				 			returnList.add(new HantoMoveRecord(null, null, cordinate));
-			 			}
-			 			catch(HantoException e)
-			 			{
-			 				add= false;
-			 			}
-			 			if(add)
-			 			{
-			 				returnList.add(new HantoMoveRecord(null, null, cordinate));
-			 			}
-			 		}
-			 		
-			 	}
-		 }
-			 	
-		return returnList;
+		try
+		{
+ 			this.checkValidPlaceLocation(where, HantoPlayerColor.getOtherColor(player));
+		}
+		catch(HantoException e)
+		{
+				return false;
+		}
+		return true;
 	}
 	
 	/**

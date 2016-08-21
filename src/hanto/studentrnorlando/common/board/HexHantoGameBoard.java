@@ -207,21 +207,11 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 			 		List<HantoCoordinate> list = this.getNieghboringSpots(cordinate);
 			 		for(HantoCoordinate nieghbor : list)
 			 		{
-			 			boolean add = false;
-			 			try
-			 			{
-			 				add = true;
-				 			this.checkValidPlayLocation(nieghbor);
-
-			 			}
-			 			catch(HantoException e)
-			 			{
-			 				add = false;
-			 			}
-			 			if(add)
+			 			
+			 			if(tryPlayerPlacementMove(nieghbor, player))
 			 			{
 			 				returnList.add(new HantoMoveRecord(null, null, nieghbor));
-			 				add = false;
+
 			 			}
 			 		}
 			 		
@@ -234,6 +224,21 @@ public abstract class HexHantoGameBoard implements SmartHantoGameBoard {
 		
 			 	
 		return returnList;
+	}
+	
+	//helper for above method
+	protected boolean tryPlayerPlacementMove(HantoCoordinate where, HantoPlayerColor player)
+	{
+		try
+		{
+ 			this.checkValidPlayLocation(where);
+
+		}
+		catch(HantoException e)
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	public String getPrintableBoard()
