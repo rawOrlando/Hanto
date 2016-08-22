@@ -73,7 +73,7 @@ public class SmartHantoGameBoardTest
 		{
 			//assertTrue((new HantoCordinateImpl(0,0)).equals(record.getTo()));
 		}
-		assertEquals(list.size(),10);
+		assertEquals(8, list.size());
 	}
 	
 	@Test
