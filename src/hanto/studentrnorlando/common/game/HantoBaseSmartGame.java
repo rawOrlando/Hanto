@@ -12,7 +12,6 @@ import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
-import hanto.studentrnorlando.common.HantoMove;
 import hanto.studentrnorlando.common.IHantoPlayer;
 import hanto.studentrnorlando.common.board.IHantoGameBoard;
 import hanto.studentrnorlando.common.board.SmartHantoGameBoard;

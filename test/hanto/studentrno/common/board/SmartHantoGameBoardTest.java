@@ -236,9 +236,9 @@ public class SmartHantoGameBoardTest
 				placementList.add(record);
 			}
 		}
-		assertEquals(placementList.size(), 6);
+		assertEquals(placementList.size(), 5);
 		assertEquals(playList.size(), 4);
-		assertEquals(list.size(), 10);
+		assertEquals(list.size(), 9);
 	}
 	
 	@Test

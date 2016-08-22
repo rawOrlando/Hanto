@@ -21,6 +21,7 @@ import hanto.common.*;
 import hanto.studentrnorlando.alpha.AlphaHantoGame;
 import hanto.studentrnorlando.factory.HantoBoardFactory;
 import hanto.studentrnorlando.factory.HantoGameFactory;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * Test cases for Alpha Hanto
@@ -70,7 +71,7 @@ public class AlphaHantoTest
 	@Test	// 1
 	public void blueMakesValidFirstMove() throws HantoException
 	{
-		assertEquals(OK, game.makeMove(BUTTERFLY, null, new TestHantoCoordinate(0, 0)));
+		assertEquals(OK, game.makeMove(new HantoMoveRecord(BUTTERFLY, null, new TestHantoCoordinate(0, 0))));
 	}
 	
 	@Test	// 2

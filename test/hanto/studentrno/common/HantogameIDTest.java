@@ -27,5 +27,15 @@ public class HantogameIDTest
 	{
 		HantoGameID.valueOf("dire");
 	}
+	
+	@Test	//4
+	public void getPrintableName()
+	{
+		assertEquals(HantoGameID.ALPHA_HANTO.toString(), "Alpha");
+		assertEquals(HantoGameID.BETA_HANTO.toString(), "Beta");
+		assertEquals(HantoGameID.GAMMA_HANTO.toString(), "Gamma");
+		assertEquals(HantoGameID.DELTA_HANTO.toString(), "Delta");
+		assertEquals(HantoGameID.EPSILON_HANTO.toString(), "Epsilon");
+	}
 
 }

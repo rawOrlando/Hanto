@@ -117,7 +117,7 @@ public class HantoCordinateImpl implements HantoCoordinate
 		}
 		catch(Exception e)
 		{
-			System.out.println("\t" + s + "Here");
+			return null;
 		}
 		
 		return reValue;

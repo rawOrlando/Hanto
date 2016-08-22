@@ -55,11 +55,32 @@ public class HantoCordinateImplTest
 		assertTrue(!cordinate.equals(new HantoCordinateImpl(0, -1)));
 	}
 	
-	@Test //5
+	@Test //7
 	public void doesNotequalsWithDiferentCordiantes()
 	{
 		HantoCordinateImpl cordinate = new HantoCordinateImpl(0, 0);
 		assertTrue(!cordinate.equals(new HantoCordinateImpl(8, 9)));
+	}
+	
+	//convertFrom String
+	@Test //8
+	public void convertFromStringAndBack()
+	{
+		HantoCordinateImpl cordinate = new HantoCordinateImpl(0, 0);
+		String s = cordinate.toString();
+		assertEquals(cordinate, HantoCordinateImpl.convertFromString(s));
+	}
+	
+	@Test //9
+	public void convertFromStringNull()
+	{
+		assertEquals(null, HantoCordinateImpl.convertFromString("null"));
+	}
+	
+	@Test //10
+	public void convertFromStringGiberish()
+	{
+		assertEquals(null, HantoCordinateImpl.convertFromString("giber ish I said some words"));
 	}
 
 }

@@ -12,8 +12,8 @@ public class GUIMasterTest {
 
 	static MainScreen screen;
 	
-	/*
-	 * !!! need to find a better way, the test frezezes on these now
+	
+	//!!! need to find a better way, the test frezezes on these now
 	@BeforeClass
 	public static void initializeClass()
 	{
@@ -51,5 +51,4 @@ public class GUIMasterTest {
 		assertTrue(screen.getContentPane().getClass().equals(HomeContentPane.class));
 		assertTrue(screen.getTitle().equals((new HomeContentPane(screen)).getTitle()));
 	}
-	*/
 }
