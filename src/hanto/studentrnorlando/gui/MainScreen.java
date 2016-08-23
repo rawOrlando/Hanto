@@ -43,7 +43,7 @@ public class MainScreen extends Screen {
 	
 	private HantoModelGame game;
 	
-	private boolean gameOver;
+	private boolean gameOver = true;
 	
 	/**
 	 * Contructor, if you don't want to play the game
@@ -53,14 +53,12 @@ public class MainScreen extends Screen {
 		HomePane = new HomeContentPane(this);
 		SettingPane = new SettingsContentPane(this);
 		GamePane = new GameContentPane(this, HantoGameID.GAMMA_HANTO);
-		this.createUserInterface();
-		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		numberOfPlayers = 2;
 		gameType = HantoGameID.GAMMA_HANTO;
-		game = HantoGameFactory.getInstance().makeHantoModelGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLACK);
-		//Move this !!!
-		GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), null);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		createGame();
+		
+		this.createUserInterface();
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	}
 	
 	public MainScreen(Driver model)
@@ -96,6 +94,7 @@ public class MainScreen extends Screen {
 				this.changeUserInterface(GamePane);
 				return true;
 			}
+			return super.doAction(actionLine);
 		}
 		if(splited[0].equals("Save"))
 		{
@@ -151,22 +150,26 @@ public class MainScreen extends Screen {
 		{
 			if(splited.length >= 4)
 			{
-				HantoMoveRecord move = HantoMoveRecord.convertFromString(splited[1] + " " + splited[2] + " " + splited[3] + " ");
-				if(move != null)
+				if(this.getContentPane().equals(this.GamePane))
 				{
-					
-					try {
-						MoveResult result = game.makeMove(move);
-						gameOver = this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), result);
-					} catch (HantoException e) {
-						System.out.println("Game Broke");
-						e.printStackTrace();
+					HantoMoveRecord move = HantoMoveRecord.convertFromString(splited[1] + " " + splited[2] + " " + splited[3] + " ");
+					if(move != null)
+					{
+						
+						try {
+							MoveResult result = game.makeMove(move);
+							gameOver = this.GamePane.updateGame(game.getBoard(), game.getAllPlayersOptions(), game.getPlayer(), result);
+							return true;
+						} catch (HantoException e) {
+							e.printStackTrace();
+							return false;
+						}
 					}
-				}
-				else
-				{
-					System.out.println("Message was messaesed up");
-					//We messed up else where
+					else
+					{
+						return false;
+						//We messed up else where
+					}
 				}
 			}
 		}

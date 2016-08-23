@@ -15,6 +15,7 @@ import hanto.studentrnorlando.beta.BetaHantoGame;
 import hanto.studentrnorlando.beta.BetaHantoGameBoard;
 import hanto.studentrnorlando.common.HantoCordinateImpl;
 import hanto.studentrnorlando.common.HantoPieceImpl;
+import hanto.studentrnorlando.common.board.AdvancedHexHantoGameBoard;
 import hanto.studentrnorlando.common.board.SmartHantoGameBoard;
 import hanto.studentrnorlando.factory.HantoBoardFactory;
 import hanto.tournament.HantoMoveRecord;
@@ -265,6 +266,87 @@ public class SmartHantoGameBoardTest
 		assertEquals(placementList.size(), 5);
 		assertEquals(playList.size(), 2);
 		assertEquals(list.size(), 7);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnFourAsBLACK()
+	{
+		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW));
+		board.playPiece(new HantoCordinateImpl(2,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.SPARROW));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.BLACK);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 5);
+		assertEquals(playList.size(), 2);
+		assertEquals(list.size(), 7);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnFourAsWHITE()
+	{
+		SmartHantoGameBoard board =  HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(-1,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW));
+		board.playPiece(new HantoCordinateImpl(2,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.SPARROW));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.WHITE);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 5);
+		assertEquals(playList.size(), 2);
+		assertEquals(list.size(), 7);
+	}
+	
+	@Test
+	public void gammaReturnOptionsOnFourAsWHITEMove() throws HantoException
+	{
+		AdvancedHexHantoGameBoard board =  (AdvancedHexHantoGameBoard) HantoBoardFactory.getInstance().makeHantoBoard(HantoGameID.GAMMA_HANTO);
+		board.playPiece(new HantoCordinateImpl(0,0), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(1,0), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		board.playPiece(new HantoCordinateImpl(0,-1), new HantoPieceImpl(HantoPlayerColor.BLACK, HantoPieceType.SPARROW));
+		board.movePiece(new HantoCordinateImpl(1,0), new HantoCordinateImpl(1,-1), new HantoPieceImpl(HantoPlayerColor.WHITE, HantoPieceType.BUTTERFLY));
+		List<HantoMoveRecord> list =  board.getAllPlayersOptions(HantoPlayerColor.WHITE);
+		List<HantoMoveRecord> placementList = new ArrayList<HantoMoveRecord>();
+		List<HantoMoveRecord> playList = new ArrayList<HantoMoveRecord>();
+		for(HantoMoveRecord record : list)
+		{
+			if(record.getPiece() != null)
+			{
+				playList.add(record);
+			}
+			else
+			{
+				placementList.add(record);
+			}
+		}
+		assertEquals(placementList.size(), 2);
+		assertEquals(playList.size(), 2);
+		assertEquals(list.size(), 4);
 	}
 
 }

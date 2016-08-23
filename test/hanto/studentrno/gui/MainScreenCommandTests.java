@@ -1,11 +1,13 @@
 package hanto.studentrno.gui;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import hanto.studentrnorlando.gui.MainScreen;
+import hanto.studentrnorlando.gui.contentpane.GameContentPane;
 import hanto.studentrnorlando.gui.contentpane.HomeContentPane;
 import hanto.studentrnorlando.gui.contentpane.SettingsContentPane;
 import hanto.common.HantoAILevel;
@@ -18,8 +20,8 @@ static MainScreen screen;
 	
 	
 	 //!!! need to find a better way, the test frezezes on these now
-	@BeforeClass
-	public static void initializeClass()
+	@Before
+	public void initializeClass()
 	{
 		screen = new MainScreen();
 	}
@@ -155,7 +157,7 @@ static MainScreen screen;
 	@Test	//14
 	public void GoToNothing()
 	{
-		screen.doAction("GoTo");
+		assertTrue(!screen.doAction("GoTo"));
 		assertTrue(screen.getContentPane().getClass().equals(HomeContentPane.class));
 		assertTrue(screen.getTitle().equals((new HomeContentPane(screen)).getTitle()));
 	}
@@ -164,8 +166,8 @@ static MainScreen screen;
 	public void GoToNonExistingPlace()
 	{
 		screen.doAction("GoTo MArs");
-		assertTrue(screen.getContentPane().getClass().equals(HomeContentPane.class));
-		assertTrue(screen.getTitle().equals((new HomeContentPane(screen)).getTitle()));
+		//assertEquals(screen.getContentPane().getClass(), HomeContentPane.class);
+		assertEquals(screen.getTitle(), (new HomeContentPane(screen)).getTitle());
 	}
 	
 	
@@ -175,6 +177,46 @@ static MainScreen screen;
 		assertTrue(!screen.doAction(""));
 		assertTrue(screen.getContentPane().getClass().equals(HomeContentPane.class));
 		assertTrue(screen.getTitle().equals((new HomeContentPane(screen)).getTitle()));
+	}
+	
+	@Test	//15
+	public void GoToGame()
+	{
+		assertTrue(screen.doAction("GoTo Game"));
+		assertTrue(screen.getContentPane().getClass().equals(GameContentPane.class));		
+	}
+	
+	@Test	//16
+	public void MoveNotEnoughInfo()
+	{
+		assertTrue(!screen.doAction("Move SomwWhere"));		
+	}
+	
+	@Test	//17
+	public void MovementFromNonGame()
+	{
+		assertTrue(!screen.doAction("Move BUTTERFLY (1,1) (1,0)"));		
+	}
+	
+	@Test	//18
+	public void MovementGiberish()
+	{
+		screen.doAction("GoTo Game");
+		assertTrue(!screen.doAction("Move Please Please make somehting spalse"));		
+	}
+	
+	@Test	//19
+	public void MovementIncorectMove()
+	{
+		screen.doAction("GoTo Game");
+		assertTrue(!screen.doAction("Move BUTTERFLY (1,1) (1,0)"));		
+	}
+	
+	@Test	//20
+	public void MovementPlacementWorks()
+	{
+		screen.doAction("GoTo Game");
+		assertTrue(screen.doAction("Move BUTTERFLY null (0,0)"));		
 	}
 	
 }

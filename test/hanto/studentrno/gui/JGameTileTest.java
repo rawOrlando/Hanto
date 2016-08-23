@@ -177,6 +177,13 @@ public class JGameTileTest
 		assertNull(tile1.getIcon());
 	}
 	
+	@Test	//15
+	public void defaultColorIsBlack()
+	{
+		JGameTile tile = new JGameTile(HantoPieceType.BUTTERFLY, null);
+		assertEquals(tile.getPiece().getColor(), HantoPlayerColor.BLACK);
+	}
+	
 	
 
 }
